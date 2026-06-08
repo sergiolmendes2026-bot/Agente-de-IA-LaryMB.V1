@@ -13,7 +13,7 @@ from groq import Groq
 ########################################################################################
 
 st.set_page_config(
-    page_title="Agente de IA Larymb.V1",
+    page_title="Agente de IA Larymb.v1",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -160,7 +160,7 @@ with st.sidebar:
     st.link_button("✉️ E-mail Para o Suporte no Caso de Dúvidas", "mailto:sergiolmendes2026@gmail.com")
 
 # Título principal do app
-st.title("Assitente de IA - Larymb.V1")
+st.title("Assitente de IA - Larymb.v1")
 
 # Subtítulo adicional
 
