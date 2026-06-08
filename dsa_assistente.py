@@ -164,7 +164,7 @@ st.title("Assitente de IA - LaryMB.V1")
 
 # Subtítulo adicional
 
-st.title("LaryMB.V1 – Seu guia inteligente para iniciantes")
+st.title("Seu guia inteligente para iniciantes")
 
 # Texto auxiliar abaixo do título
 st.caption("Faça sua pergunta e obtenha respostas, explicações e referências.")
