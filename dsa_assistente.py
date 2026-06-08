@@ -23,30 +23,48 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* ===== Título principal ===== */
-    h1 {
-      font-size: 12px; /* bem pequeno */
+    /* ===== Fundo geral ===== */
+    body {
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* gradiente roxo-azul */
+      color: #f5f5f5;
+      font-family: 'Inter', 'Roboto', sans-serif;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      background-color: #1c1c1c;
+      padding: 20px;
+      color: #e0e0e0;
+      font-size: 12px;
+    }
+
+    .sidebar h1 {
+      font-size: 13px;
       font-weight: 600;
       color: #ffffff;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* sombra discreta */
-      margin-bottom: 6px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
-    /* ===== Subtítulo ===== */
+    /* ===== Área principal ===== */
+    h1 {
+      font-size: 12px; /* título reduzido */
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+
     h2 {
-      font-size: 10px; /* ainda menor */
+      font-size: 10px; /* subtítulo menor */
       font-weight: 500;
       color: #e0e0e0;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-      margin-bottom: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
 
-    /* ===== Texto explicativo ===== */
     p {
-      font-size: 9px; /* texto bem reduzido */
+      font-size: 9px;
       line-height: 1.3;
       color: #dcdcdc;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
     }
 
     /* ===== Input de chat ===== */
@@ -66,7 +84,7 @@ st.markdown(
       font-weight: 500;
       padding: 6px 10px;
       border-radius: 6px;
-      background: #00bcd4; /* azul turquesa moderno */
+      background: #2575fc; /* azul vibrante */
       color: #fff;
       border: none;
       cursor: pointer;
@@ -74,7 +92,7 @@ st.markdown(
     }
 
     button:hover {
-      background: #0097a7; /* azul mais escuro no hover */
+      background: #1a5edb; /* azul mais escuro no hover */
     }
     </style>
     """,
