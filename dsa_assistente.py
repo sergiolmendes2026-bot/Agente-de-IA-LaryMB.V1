@@ -23,96 +23,63 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* Fundo com gradiente moderno sem rosa */
-        html, body, [class*="stAppViewContainer"] {
-            background: linear-gradient(135deg, #FFA500, #8A2BE2, #1E90FF);
-            color: #FDFDFD;
-            font-family: 'Segoe UI', sans-serif;
-        }
+    /* ===== Título principal ===== */
+    h1 {
+      font-size: 12px; /* bem pequeno */
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* sombra discreta */
+      margin-bottom: 6px;
+    }
 
-        /* Título principal em azul neon com sombra leve */
-        h1 {
-            color: #00FFFF; /* azul neon */
-            font-weight: bold;
-            text-shadow: 
-                1px 1px 3px #000000,   /* sombra leve para contraste */
-                0 0 6px #00FFFF;       /* brilho suave */
-        }
+    /* ===== Subtítulo ===== */
+    h2 {
+      font-size: 10px; /* ainda menor */
+      font-weight: 500;
+      color: #e0e0e0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      margin-bottom: 5px;
+    }
 
-        /* Subtítulos em dourado metálico com sombra leve */
-        h2, h3 {
-            color: #FFD700; /* dourado metálico */
-            font-weight: bold;
-            text-shadow: 
-                1px 1px 3px #000000,   /* sombra leve */
-                0 0 6px #FFD700;       /* brilho suave */
-        }
+    /* ===== Texto explicativo ===== */
+    p {
+      font-size: 9px; /* texto bem reduzido */
+      line-height: 1.3;
+      color: #dcdcdc;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
 
-        /* Barra lateral azul vibrante com borda dourada */
-        [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #1E90FF, #000080);
-            color: #FFFFFF;
-            border-right: 3px solid #FFD700;
-            box-shadow: 0 0 8px #FFD700;
-        }
+    /* ===== Input de chat ===== */
+    .chat-input {
+      width: 100%;
+      padding: 6px;
+      font-size: 9px;
+      border-radius: 6px;
+      border: 1px solid #cccccc;
+      background-color: #2c2c2c;
+      color: #ffffff;
+    }
 
-        /* Botões com gradiente roxo e azul */
-        button {
-            background: linear-gradient(90deg, #8A2BE2, #1E90FF) !important;
-            color: #FFFFFF !important;
-            border-radius: 8px !important;
-            font-weight: bold !important;
-            border: 2px solid #FFD700 !important;
-            box-shadow: 0 0 6px #1E90FF;
-            transition: 0.3s ease-in-out;
-        }
+    /* ===== Botões ===== */
+    button {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #00bcd4; /* azul turquesa moderno */
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
 
-        button:hover {
-            background: linear-gradient(90deg, #1E90FF, #8A2BE2) !important;
-            color: #FFD700 !important;
-            box-shadow: 0 0 10px #FFD700;
-        }
-
-        /* Campos de entrada */
-        input, textarea {
-            background-color: #FFFFFF !important;
-            color: #0D0D2B !important;
-            border-radius: 6px !important;
-            border: 2px solid #1E90FF !important;
-            font-weight: bold !important;
-            padding: 6px !important;
-        }
-
-        /* Placeholder em azul claro */
-        input::placeholder {
-            color: #1E90FF !important;
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        /* Caixa de chat */
-        [data-testid="stChatInput"] {
-            background-color: #FFFFFF !important;
-            border-radius: 10px !important;
-            color: #0D0D2B !important;
-            border: 2px solid #FFD700 !important;
-        }
-
-        [data-testid="stChatInput"] input::placeholder {
-            color: #1E90FF !important;
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        /* Rodapé */
-        hr {
-            border: 1px solid #FFD700;
-        }
+    button:hover {
+      background: #0097a7; /* azul mais escuro no hover */
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 # Define um prompt de sistema que descreve as regras e comportamento do assistente de IA
 CUSTOM_PROMPT = """
 Você é o "Agente de IA LaryMB.V1", um assistente de IA especialista em varios assuntos,. Sua missão é ajudar iniciantes com dúvidas de forma clara, precisa e útil.
