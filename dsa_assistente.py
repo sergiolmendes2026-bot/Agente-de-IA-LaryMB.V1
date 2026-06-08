@@ -140,7 +140,7 @@ REGRAS DE OPERAÇÃO:
 with st.sidebar:
     
     # Define o título da barra lateral
-    st.title("🤖 Agente de IA LaryMB.V1")
+    st.title("🤖 Agente de IA Larymb.V1")
     
     # Mostra um texto explicativo sobre o assistente
     st.markdown("Um assistente de IA focado para ajudar iniciantes.")
