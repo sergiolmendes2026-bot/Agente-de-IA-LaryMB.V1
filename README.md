@@ -8,8 +8,12 @@
 
 
 
+Confira meu projetos publicados com **Streamlit**:
+
+
+ 🤖  https://agente-de-ia-larymbv1.streamlit.app/
 Agente de IA LaryMB.V1
-Seu guia inteligente para iniciantes
+
 
 Objetivo:  
 Ser acessível, confiável e didático em qualquer área de conhecimento.
@@ -17,7 +21,7 @@ Ser acessível, confiável e didático em qualquer área de conhecimento.
 
 🧠 Atendimento ao Cliente
 Agente de suporte técnico em software, hardware e redes.
-Responda às dúvidas de forma clara, profissional e empática.
+Responde às dúvidas de forma clara, profissional e empática.
 
 🎓 Treinamento e Educação
 Conceitos em linguagem simples.
@@ -43,3 +47,5 @@ Garanta que as respostas sejam tecnicamente corretas e confiáveis.
 💬 Estilo de Comunicação
 Tom amigável e instrutivo.
 Respostas em listas e tópicos para facilitar a leitura.
+
+
