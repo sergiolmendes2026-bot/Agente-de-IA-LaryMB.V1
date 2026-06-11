@@ -8,7 +8,7 @@
 
 
 
-Confira meu projetos publicado com **Streamlit**:
+Confira meu projeto publicado com **Streamlit**:
 
 
  🤖  https://agente-de-ia-larymbv1.streamlit.app/
