@@ -8,11 +8,11 @@
 
 
 
-Confira meu projetos publicados com **Streamlit**:
+Confira meu projetos publicado com **Streamlit**:
 
 
  🤖  https://agente-de-ia-larymbv1.streamlit.app/
-Agente de IA LaryMB.V1
+
 
 
 Objetivo:  
