@@ -8,7 +8,9 @@
 
 
 
-Confira meu projeto publicado com **Streamlit**:
+Confira meu projeto publicado com **Streamlit Community Cloud**:
+
+
 
 
  🤖  https://agente-de-ia-larymbv1.streamlit.app/
