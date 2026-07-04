@@ -451,6 +451,9 @@ if prompt := st.chat_input("Qual sua dúvida ?"):
             except Exception as e:
                 st.error(f"Ocorreu um erro ao se comunicar com a API da Groq: {e}")
 
+# O código acima termina normalmente...
+
+# REMOVA OS ESPAÇOS ANTES DO st.markdown ABAIXO:
 st.markdown(
     """
     <div style="text-align: center; color: gray;">
@@ -460,8 +463,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Obrigado DSA
 
 
 
