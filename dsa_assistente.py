@@ -453,14 +453,11 @@ if prompt := st.chat_input("Qual sua dúvida ?"):
 
 # O código acima termina normalmente...
 
-st.markdown(
-    """
-    <div style="text-align: center; color: gray;">
-        <hr>
-        <p>Agente de AI Coder - Acessível, confiável e útil para quem está começando.</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div style="text-align: center; color: gray;">
+<hr>
+<p> Agente de AI Coder - Acessível, confiável e útil para quem está começando.</p>
+</div>
+""", unsafe_allow_html=True)
 
 
