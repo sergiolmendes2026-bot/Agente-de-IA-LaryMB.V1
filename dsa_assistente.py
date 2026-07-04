@@ -336,8 +336,7 @@ Nunca faça suposições sem informar que se trata de uma hipótese.
 Caso uma informação esteja desatualizada ou não possa ser confirmada, informe essa limitação ao usuário.
 
 OBJETIVO FINAL
-Ser um assistente de Inteligência Artificial confiável, versátil e eficiente, capaz de fornecer suporte técnico, orientação, consultoria, planejamento, análise e produção de conteúdo, entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário.
-
+... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário."""
 
 # Cria o conteúdo da barra lateral no Streamlit
 with st.sidebar:
