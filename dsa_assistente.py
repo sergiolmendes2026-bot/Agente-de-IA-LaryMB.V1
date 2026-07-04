@@ -453,16 +453,14 @@ if prompt := st.chat_input("Qual sua dúvida ?"):
 
 # O código acima termina normalmente...
 
-# REMOVA OS ESPAÇOS ANTES DO st.markdown ABAIXO:
 st.markdown(
     """
     <div style="text-align: center; color: gray;">
         <hr>
-        <p> Agente de AI Coder - Acessível, confiável e útil para quem está começando.</p>
+        <p>Agente de AI Coder - Acessível, confiável e útil para quem está começando.</p>
     </div>
     """,
     unsafe_allow_html=True
 )
-
 
 
