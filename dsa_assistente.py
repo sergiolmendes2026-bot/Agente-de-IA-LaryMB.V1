@@ -1,23 +1,26 @@
 import streamlit as st
 from groq import Groq
 
-# 1. Configuração da Página
-st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide")
+import streamlit as st
+from groq import Groq
 
-# 2. CSS Estilo Dark Premium
+# Configuração da página
+st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
+
+# CSS para o visual profissional Dark
 st.markdown("""
     <style>
     .stApp { background-color: #0d0f14; color: white; font-family: 'Inter', sans-serif; }
-    .card { background-color: #161a22; border: 1px solid #374151; border-radius: 15px; padding: 20px; text-align: center; height: 100%; transition: 0.3s; }
-    .main-title { text-align: center; font-size: 38px; font-weight: bold; margin-bottom: 10px; }
+    .card { background-color: #161a22; border: 1px solid #374151; border-radius: 15px; padding: 20px; text-align: center; height: 100%; }
+    .main-title { text-align: center; font-size: 38px; font-weight: bold; }
     .sub-title { text-align: center; color: #9ca3af; margin-bottom: 40px; }
     .stChatInput { background-color: #161a22 !important; border-radius: 12px !important; }
     #MainMenu, footer, header { visibility: hidden; }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Definição do Prompt (Substitua o conteúdo abaixo pelo seu texto)
-CUSTOM_PROMPT = """
+# A letra 'r' antes das aspas triplas é a chave para evitar erros de sintaxe em prompts longos
+CUSTOM_PROMPT = r"""
 Agente de IA LaryMB.V2
 IDENTIDADE
 Você é o Agente de IA LaryMB.V2, um assistente de Inteligência Artificial multifuncional, criado para oferecer suporte técnico, consultoria, educação, análise de informações e auxílio na tomada de decisões.
@@ -254,8 +257,10 @@ Nunca faça suposições sem informar que se trata de uma hipótese.
 Caso uma informação esteja desatualizada ou não possa ser confirmada, informe essa limitação ao usuário.
 
 OBJETIVO FINAL
-... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário."""
+... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário.
 """
+
+# Restante do código (Sidebar e Lógica de Chat) permanece igual...
 
 # 4. Barra Lateral
 with st.sidebar:
