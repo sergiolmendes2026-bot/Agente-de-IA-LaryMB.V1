@@ -1,25 +1,36 @@
 import streamlit as st
 from groq import Groq
 
-import streamlit as st
-from groq import Groq
-
-# Configuração da página
+# Configuração da página - Layout Wide para ocupar a tela toda
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
-# CSS para o visual profissional Dark
+# --- CSS Profissional (Design Dark Premium) ---
 st.markdown("""
     <style>
-    .stApp { background-color: #0d0f14; color: white; font-family: 'Inter', sans-serif; }
-    .card { background-color: #161a22; border: 1px solid #374151; border-radius: 15px; padding: 20px; text-align: center; height: 100%; }
-    .main-title { text-align: center; font-size: 38px; font-weight: bold; }
+    /* Fundo escuro global */
+    .stApp { background-color: #0d0f14; color: #ffffff; font-family: 'Inter', sans-serif; }
+    
+    /* Estilo dos Cards */
+    .card { 
+        background-color: #161a22; 
+        border: 1px solid #374151; 
+        border-radius: 16px; 
+        padding: 20px; 
+        text-align: center; 
+        transition: 0.3s;
+    }
+    .card:hover { border-color: #7c3aed; }
+    
+    /* Títulos */
+    .main-title { text-align: center; font-size: 40px; font-weight: 700; }
     .sub-title { text-align: center; color: #9ca3af; margin-bottom: 40px; }
-    .stChatInput { background-color: #161a22 !important; border-radius: 12px !important; }
+    
+    /* Ocultar elementos padrão do Streamlit */
     #MainMenu, footer, header { visibility: hidden; }
     </style>
 """, unsafe_allow_html=True)
 
-# A letra 'r' antes das aspas triplas é a chave para evitar erros de sintaxe em prompts longos
+# --- SEU PROMPT PERSONALIZADO (Raw String para evitar erro de sintaxe) ---
 CUSTOM_PROMPT = r"""
 Agente de IA LaryMB.V2
 IDENTIDADE
@@ -257,42 +268,41 @@ Nunca faça suposições sem informar que se trata de uma hipótese.
 Caso uma informação esteja desatualizada ou não possa ser confirmada, informe essa limitação ao usuário.
 
 OBJETIVO FINAL
-... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário.
+... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário."""
 """
 
-# Restante do código (Sidebar e Lógica de Chat) permanece igual...
-
-# 4. Barra Lateral
+# --- BARRA LATERAL ---
 with st.sidebar:
     st.title("🤖 Agente de IA Larymb.v1")
-    st.write("v1.0.0")
+    st.caption("v1.0.0")
     api_key = st.text_input("Insira sua API Key Groq", type="password")
     st.markdown("---")
     st.write("Precisa de ajuda?")
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com")
 
-# 5. Interface Principal
+# --- INTERFACE PRINCIPAL ---
 st.markdown("<h1 class='main-title'>Como posso <span style='color: #8b5cf6;'>te ajudar</span> hoje?</h1>", unsafe_allow_html=True)
 st.markdown("<p class='sub-title'>Seu guia inteligente para respostas, explicações e referências.</p>", unsafe_allow_html=True)
 
-# Cards de Sugestão
+# Grid de 4 Cards
 cols = st.columns(4)
 features = ["Respostas Inteligentes", "Explicações Detalhadas", "Referências Confiáveis", "Rápido e Eficiente"]
 for i, col in enumerate(cols):
     with col:
         st.markdown(f"<div class='card'><b>{features[i]}</b></div>", unsafe_allow_html=True)
 
-st.write("<br><br>", unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
-# 6. Histórico de Mensagens
+# --- LÓGICA DE CHAT ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Exibir histórico
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# 7. Lógica do Chat e API
+# Entrada do Usuário
 if prompt := st.chat_input("Digite sua dúvida aqui..."):
     if not api_key:
         st.warning("Por favor, insira sua chave API na barra lateral.")
