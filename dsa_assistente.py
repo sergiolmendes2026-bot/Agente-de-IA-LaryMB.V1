@@ -272,12 +272,18 @@ OBJETIVO FINAL
 
 # --- BARRA LATERAL ---
 with st.sidebar:
-    st.title("🤖 Agente de IA Larymb.v1")
+    # Ajuste o caminho da imagem se você tiver o arquivo do robô localmente
+    # st.image("caminho_para_sua_imagem_do_robo.png", width=80) 
+    
+    st.markdown("## 🤖 Agente de IA Larymb.v1")
     st.caption("v1.0.0")
+    
+    st.markdown("---")
+    
     api_key = st.text_input("Insira sua API Key Groq", type="password")
     st.markdown("---")
     
-    # ADICIONE ESTE BLOCO ABAIXO PARA EXIBIR A INFORMAÇÃO
+    # Bloco "Precisa de ajuda?"
     st.markdown("""
     <div style='background-color: #161a22; padding: 15px; border-radius: 10px; border: 1px solid #374151;'>
         <h4 style='color: white; margin-top: 0;'>Precisa de ajuda?</h4>
