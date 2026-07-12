@@ -1,104 +1,22 @@
-# Estudo de Caso 1 - DSA AI Coder - Criando Seu Assistente de Programação Python, em Python
-
-# Importa módulo para interagir com o sistema operacional
-import os
-
-# Importa a biblioteca Streamlit para criar a interface web interativa
 import streamlit as st
-
-# Importa a classe Groq para se conectar à API da plataforma Groq e acessar o LLM
 from groq import Groq
-########################################################################################
- #Configura a página do Streamlit com título, ícone, layout e estado inicial da sidebar#
-########################################################################################
 
-st.set_page_config(
-    page_title="Agente de IA Larymb.v1",
-    page_icon="🤖",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# 1. Configuração da Página
+st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide")
 
-# CSS com estilo pastel azul + lilás e barra lateral prateada
-st.markdown(
-    """
+# 2. CSS Estilo Dark Premium
+st.markdown("""
     <style>
-    /* ===== Fundo geral ===== */
-    body {
-      background: linear-gradient(135deg, #6a11cb, #2575fc); /* gradiente roxo-azul */
-      color: #f5f5f5;
-      font-family: 'Inter', 'Roboto', sans-serif;
-    }
-
-    /* ===== Sidebar ===== */
-    .sidebar {
-      background-color: #1c1c1c;
-      padding: 20px;
-      color: #e0e0e0;
-      font-size: 12px;
-    }
-
-    .sidebar h1 {
-      font-size: 13px;
-      font-weight: 600;
-      color: #ffffff;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    /* ===== Área principal ===== */
-    h1 {
-      font-size: 12px; /* título reduzido */
-      font-weight: 600;
-      color: #ffffff;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-    }
-
-    h2 {
-      font-size: 10px; /* subtítulo menor */
-      font-weight: 500;
-      color: #e0e0e0;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-
-    p {
-      font-size: 9px;
-      line-height: 1.3;
-      color: #dcdcdc;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    }
-
-    /* ===== Input de chat ===== */
-    .chat-input {
-      width: 100%;
-      padding: 6px;
-      font-size: 9px;
-      border-radius: 6px;
-      border: 1px solid #cccccc;
-      background-color: #2c2c2c;
-      color: #ffffff;
-    }
-
-    /* ===== Botões ===== */
-    button {
-      font-size: 9px;
-      font-weight: 500;
-      padding: 6px 10px;
-      border-radius: 6px;
-      background: #2575fc; /* azul vibrante */
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    }
-
-    button:hover {
-      background: #1a5edb; /* azul mais escuro no hover */
-    }
+    .stApp { background-color: #0d0f14; color: white; font-family: 'Inter', sans-serif; }
+    .card { background-color: #161a22; border: 1px solid #374151; border-radius: 15px; padding: 20px; text-align: center; height: 100%; transition: 0.3s; }
+    .main-title { text-align: center; font-size: 38px; font-weight: bold; margin-bottom: 10px; }
+    .sub-title { text-align: center; color: #9ca3af; margin-bottom: 40px; }
+    .stChatInput { background-color: #161a22 !important; border-radius: 12px !important; }
+    #MainMenu, footer, header { visibility: hidden; }
     </style>
-    """,
-    unsafe_allow_html=True
-)
-# Define um prompt de sistema que descreve as regras e comportamento do assistente de IA
+""", unsafe_allow_html=True)
+
+# 3. Definição do Prompt (Substitua o conteúdo abaixo pelo seu texto)
 CUSTOM_PROMPT = """
 Agente de IA LaryMB.V2
 IDENTIDADE
@@ -337,119 +255,59 @@ Caso uma informação esteja desatualizada ou não possa ser confirmada, informe
 
 OBJETIVO FINAL
 ... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário."""
+"""
 
-# Cria o conteúdo da barra lateral no Streamlit
+# 4. Barra Lateral
 with st.sidebar:
-    
-    # Define o título da barra lateral
-    st.title("🤖 Agente de IA Larymb.V1")
-    
-    # Mostra um texto explicativo sobre o assistente
-    st.markdown("Um assistente de IA focado para ajudar iniciantes.")
-    
-    # Campo para inserir a chave de API da Groq
-    groq_api_key = st.text_input(
-        "Insira sua API Key Groq", 
-        type="password",
-        help="Obtenha sua chave em https://console.groq.com/keys"
-    )
-
-    # Adiciona linhas divisórias e explicações extras na barra lateral
+    st.title("🤖 Agente de IA Larymb.v1")
+    st.write("v1.0.0")
+    api_key = st.text_input("Insira sua API Key Groq", type="password")
     st.markdown("---")
-    st.markdown("Desenvolvido para auxiliar em suas dúvidas. IA pode cometer erros. Sempre verifique as respostas.")
-           
-    # Botão de link para enviar e-mail ao suporte da DSA
-    st.link_button("✉️ E-mail Para o Suporte no Caso de Dúvidas", "mailto:sergiolmendes2026@gmail.com")
+    st.write("Precisa de ajuda?")
+    st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com")
 
-# Título principal do app
-st.title("Assitente de IA - Larymb.v1")
+# 5. Interface Principal
+st.markdown("<h1 class='main-title'>Como posso <span style='color: #8b5cf6;'>te ajudar</span> hoje?</h1>", unsafe_allow_html=True)
+st.markdown("<p class='sub-title'>Seu guia inteligente para respostas, explicações e referências.</p>", unsafe_allow_html=True)
 
-# Subtítulo adicional
+# Cards de Sugestão
+cols = st.columns(4)
+features = ["Respostas Inteligentes", "Explicações Detalhadas", "Referências Confiáveis", "Rápido e Eficiente"]
+for i, col in enumerate(cols):
+    with col:
+        st.markdown(f"<div class='card'><b>{features[i]}</b></div>", unsafe_allow_html=True)
 
-st.title("Seu guia inteligente para iniciantes")
+st.write("<br><br>", unsafe_allow_html=True)
 
-# Texto auxiliar abaixo do título
-st.caption("Faça sua pergunta e obtenha respostas, explicações e referências.")
-
-# Inicializa o histórico de mensagens na sessão, caso ainda não exista
+# 6. Histórico de Mensagens
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Exibe todas as mensagens anteriores armazenadas no estado da sessão
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Inicializa a variável do cliente Groq como None
-client = None
-
-# Verifica se o usuário forneceu a chave de API da Groq
-if groq_api_key:
-    
-    try:
-        
-        # Cria cliente Groq com a chave de API fornecida
-        client = Groq(api_key = groq_api_key)
-    
-    except Exception as e:
-        
-        # Exibe erro caso haja problema ao inicializar cliente
-        st.sidebar.error(f"Erro ao inicializar o cliente Groq: {e}")
+# 7. Lógica do Chat e API
+if prompt := st.chat_input("Digite sua dúvida aqui..."):
+    if not api_key:
+        st.warning("Por favor, insira sua chave API na barra lateral.")
         st.stop()
-
-# Caso não tenha chave, mas já existam mensagens, mostra aviso
-elif st.session_state.messages:
-     st.warning("Por favor, insira sua API Key da Groq na barra lateral para continuar.")
-
-# Captura a entrada do usuário no chat
-if prompt := st.chat_input("Qual sua dúvida ?"):
-    
-    # Se não houver cliente válido, mostra aviso e para a execução
-    if not client:
-        st.warning("Por favor, insira sua API Key da Groq na barra lateral para começar.")
-        st.stop()
-
-    # Armazena a mensagem do usuário no estado da sessão
+        
+    client = Groq(api_key=api_key)
     st.session_state.messages.append({"role": "user", "content": prompt})
     
-    # Exibe a mensagem do usuário no chat
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Prepara mensagens para enviar à API, incluindo prompt de sistema
-    messages_for_api = [{"role": "system", "content": CUSTOM_PROMPT}]
-    for msg in st.session_state.messages:
-        
-        messages_for_api.append(msg)
-
-    # Cria a resposta do assistente no chat
     with st.chat_message("assistant"):
-        
-        with st.spinner("Analisando sua pergunta..."):
+        with st.spinner("Analisando..."):
+            messages_for_api = [{"role": "system", "content": CUSTOM_PROMPT}] + st.session_state.messages
             
-            try:
-                
-                # Chama a API da Groq para gerar a resposta do assistente
-                chat_completion = client.chat.completions.create(
-                    messages = messages_for_api,
-                    model = "openai/gpt-oss-120b", 
-                    temperature = 0.7,
-                    max_tokens = 2048,
-                )
-                
-                # Extrai a resposta gerada pela API
-                dsa_ai_resposta = chat_completion.choices[0].message.content
-                
-                # Exibe a resposta no Streamlit
-                st.markdown(dsa_ai_resposta)
-                
-                # Armazena resposta do assistente no estado da sessão
-                st.session_state.messages.append({"role": "assistant", "content": dsa_ai_resposta})
-
-            # Caso ocorra erro na comunicação com a API, exibe mensagem de erro
-            except Exception as e:
-                st.error(f"Ocorreu um erro ao se comunicar com a API da Groq: {e}")
-
-# O código acima termina normalmente...
-
-st.markdown("<div style='text-align: center; color: gray;'><hr><p>Agente de AI Coder - Acessível, confiável e útil para quem está começando.</p></div>", unsafe_allow_html=True)
+            response = client.chat.completions.create(
+                messages=messages_for_api,
+                model="llama-3.3-70b-versatile",
+                temperature=0.7
+            )
+            ans = response.choices[0].message.content
+            st.markdown(ans)
+            st.session_state.messages.append({"role": "assistant", "content": ans})
