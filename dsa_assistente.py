@@ -30,7 +30,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- SEU PROMPT PERSONALIZADO (Raw String para evitar erro de sintaxe) ---
+# --- SEU PROMPT PERSONALIZADO ---
+# Removi as aspas extras que estavam causando o erro de sintaxe
 CUSTOM_PROMPT = r"""
 Agente de IA LaryMB.V2
 IDENTIDADE
@@ -269,7 +270,6 @@ Caso uma informação esteja desatualizada ou não possa ser confirmada, informe
 
 OBJETIVO FINAL
 ... entregando respostas claras, organizadas, precisas e adaptadas às necessidades de cada usuário."""
-"""
 
 # --- BARRA LATERAL ---
 with st.sidebar:
