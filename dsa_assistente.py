@@ -31,7 +31,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- SEU PROMPT PERSONALIZADO ---
-# Removi as aspas extras que estavam causando o erro de sintaxe
 CUSTOM_PROMPT = r"""
 Agente de IA LaryMB.V2
 IDENTIDADE
