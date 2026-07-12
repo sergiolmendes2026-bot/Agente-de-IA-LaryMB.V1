@@ -276,12 +276,19 @@ with st.sidebar:
     st.caption("v1.0.0")
     api_key = st.text_input("Insira sua API Key Groq", type="password")
     st.markdown("---")
-    st.write("Precisa de ajuda?")
+    
+    # ADICIONE ESTE BLOCO ABAIXO PARA EXIBIR A INFORMAÇÃO
+    st.markdown("""
+    <div style='background-color: #161a22; padding: 15px; border-radius: 10px; border: 1px solid #374151;'>
+        <h4 style='color: white; margin-top: 0;'>Precisa de ajuda?</h4>
+        <p style='font-size: 0.85em; color: #9ca3af;'>
+        Desenvolvido para auxiliar em suas dúvidas, IA pode cometer erros. Sempre verifique as respostas.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com")
-
-# --- INTERFACE PRINCIPAL ---
-st.markdown("<h1 class='main-title'>Como posso <span style='color: #8b5cf6;'>te ajudar</span> hoje?</h1>", unsafe_allow_html=True)
-st.markdown("<p class='sub-title'>Seu guia inteligente para respostas, explicações e referências.</p>", unsafe_allow_html=True)
 
 # Grid de 4 Cards
 cols = st.columns(4)
