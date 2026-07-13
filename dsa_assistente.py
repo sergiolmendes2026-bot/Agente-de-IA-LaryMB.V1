@@ -27,9 +27,14 @@ init_db()
 
 # --- CSS PERSONALIZADO ---
 st.markdown("""
-    <style>
-    .stApp { background-color: #050505; color: #ffffff; }
-    </style>
+    <h1 style="text-align: center; color: white;">
+        Como posso 
+        <span style="color: #8B5CF6;">te ajudar</span> 
+        hoje?
+    </h1>
+    <p style="text-align: center; color: #888;">
+        Seu guia inteligente para respostas, explicações e referências.
+    </p>
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR ---
