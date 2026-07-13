@@ -1,78 +1,77 @@
 import streamlit as st
 from groq import Groq
+import sqlite3
+import datetime
 
-# Configuração da página
+# --- CONFIGURAÇÃO DO BANCO DE DADOS ---
+def init_db():
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS chats 
+                 (id INTEGER PRIMARY KEY, chat_nome TEXT, role TEXT, content TEXT, timestamp TEXT)''')
+    conn.commit()
+    conn.close()
+
+def salvar_mensagem(chat_nome, role, content):
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO chats (chat_nome, role, content, timestamp) VALUES (?, ?, ?, ?)",
+              (chat_nome, role, content, datetime.datetime.now().isoformat()))
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
-# --- CSS PARA ESTILIZAÇÃO DARK ---
-st.markdown("""
-    <style>
-    .stApp { background-color: #0d0f14; color: #ffffff; font-family: 'Inter', sans-serif; }
-    .sidebar-card { background-color: #161a22; padding: 15px; border-radius: 10px; border: 1px solid #374151; margin-top: 20px; }
-    #MainMenu, footer, header { visibility: hidden; }
-    </style>
-""", unsafe_allow_html=True)
-
-# --- PROMPT DE SISTEMA ---
-CUSTOM_PROMPT = "Você é o Agente de IA LaryMB.V2, um assistente especializado em suporte técnico e educação. Seja organizado, use tabelas e listas."
-
-# --- ESTADO DE NAVEGAÇÃO ---
-if 'page' not in st.session_state:
-    st.session_state.page = "Início"
-
-# --- SIDEBAR ---
+# --- SIDEBAR COM GERENCIAMENTO DE CHATS ---
 with st.sidebar:
     st.markdown("## 🤖 Agente de IA Larymb.v1")
-    st.caption("v1.0.0")
+    
+    if st.button("➕ Nova Conversa", use_container_width=True):
+        st.session_state.chat_atual = f"Conversa {datetime.datetime.now().strftime('%H:%M:%S')}"
+        st.rerun()
+
     st.markdown("---")
-    
-    if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
-    if st.button("⭐ Favoritos", use_container_width=True): st.session_state.page = "Favoritos"
-    if st.button("🕒 Histórico", use_container_width=True): st.session_state.page = "Histórico"
-    if st.button("⚙️ Configurações", use_container_width=True): st.session_state.page = "Configurações"
-    
-    st.markdown("---")
-    api_key = st.text_input("Insira sua API Key Groq", type="password")
-    
-    st.markdown("""
-    <div class='sidebar-card'>
-        <h4 style='color: white; margin-top: 0;'>Precisa de ajuda?</h4>
-        <p style='font-size: 0.85em; color: #9ca3af;'>IA pode cometer erros. Sempre verifique as informações.</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
+    # Busca nomes únicos de chats no banco
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    c.execute("SELECT DISTINCT chat_nome FROM chats")
+    chats = [row[0] for row in c.fetchall()]
+    conn.close()
 
-# --- RENDERIZAÇÃO DA PÁGINA ---
-if st.session_state.page == "Início":
-    st.markdown("<h1 style='text-align: center;'>Como posso te ajudar hoje?</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #9ca3af;'>Seu guia inteligente para respostas, explicações e referências.</p>", unsafe_allow_html=True)
+    for nome in chats:
+        if st.button(nome, use_container_width=True):
+            st.session_state.chat_atual = nome
+            st.rerun()
+
+# --- LÓGICA DO CHAT ---
+if "chat_atual" not in st.session_state:
+    st.session_state.chat_atual = "Conversa 1"
+
+st.header(f"Visualizando: {st.session_state.chat_atual}")
+
+# Carregar mensagens do banco para a conversa atual
+conn = sqlite3.connect('historico_chat.db')
+c = conn.cursor()
+c.execute("SELECT role, content FROM chats WHERE chat_nome = ? ORDER BY id ASC", (st.session_state.chat_atual,))
+mensagens = c.fetchall()
+conn.close()
+
+for role, content in mensagens:
+    with st.chat_message(role):
+        st.markdown(content)
+
+# Input
+if prompt := st.chat_input("Digite sua dúvida..."):
+    # Salva usuário
+    salvar_mensagem(st.session_state.chat_atual, "user", prompt)
     
-    # Lógica de Chat
-    if "messages" not in st.session_state: st.session_state.messages = []
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]): st.markdown(msg["content"])
-
-    if prompt := st.chat_input("Digite sua dúvida aqui..."):
-        if not api_key:
-            st.error("Por favor, insira sua API Key na lateral.")
-            st.stop()
-        
-        client = Groq(api_key=api_key)
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"): st.markdown(prompt)
-
-        with st.chat_message("assistant"):
-            response = client.chat.completions.create(
-                messages=[{"role": "system", "content": CUSTOM_PROMPT}] + st.session_state.messages,
-                model="llama-3.3-70b-versatile"
-            )
-            ans = response.choices[0].message.content
-            st.markdown(ans)
-            st.session_state.messages.append({"role": "assistant", "content": ans})
-
-else:
-    st.header(f"Página: {st.session_state.page}")
-    st.write("Esta área de navegação está pronta para receber seus dados.")
+    # Simula chamada da IA (Groq)
+    # response = client.chat.completions.create(...) 
+    resposta_ia = "Resposta simulada para: " + prompt 
+    
+    # Salva IA
+    salvar_mensagem(st.session_state.chat_atual, "assistant", resposta_ia)
+    st.rerun()
