@@ -11,7 +11,7 @@ def init_db():
     conn = sqlite3.connect('historico_chat.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS chats 
-                 (id INTEGER PRIMARY KEY, role TEXT, content TEXT, timestamp TEXT)''')
+                  (id INTEGER PRIMARY KEY, role TEXT, content TEXT, timestamp TEXT)''')
     conn.commit()
     conn.close()
 
@@ -25,10 +25,21 @@ def salvar_mensagem(role, content):
 
 init_db()
 
-# --- CSS GLOBAL ---
+# --- CSS GLOBAL E SIDEBAR ---
 st.markdown("""
     <style>
+    /* Fundo da aplicação */
     .stApp { background-color: #050505; color: #ffffff; }
+    
+    /* Estilização da Sidebar (A parte roxa que você pediu) */
+    [data-testid="stSidebar"] {
+        background-color: #4B0082; 
+    }
+    
+    /* Ajuste para o texto dentro da sidebar ficar branco */
+    [data-testid="stSidebar"] * {
+        color: white !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -38,7 +49,7 @@ with st.sidebar:
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3>Agente de IA Larymb.v1</h3>
-            <div style="color: #00ff41; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
+            <div style="color: #D8BFD8; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
     
@@ -85,60 +96,38 @@ if st.session_state.page == "Início":
             st.error("Insira sua API Key na lateral.")
         else:
             salvar_mensagem("user", prompt)
-            
             client = Groq(api_key=api_key)
             response = client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
                 model="llama-3.3-70b-versatile"
             )
-            
             resposta = response.choices[0].message.content
             salvar_mensagem("assistant", resposta)
             st.rerun()
 
 elif st.session_state.page == "Conversas":
     st.header("💬 Conversas")
-    st.write("Aqui estão suas interações salvas:")
-    
-    # Conecta ao banco de dados para buscar o histórico
     conn = sqlite3.connect('historico_chat.db')
     c = conn.cursor()
-    # Busca todas as mensagens ordenadas pela ordem que foram salvas
     c.execute("SELECT role, content FROM chats ORDER BY id ASC")
     mensagens = c.fetchall()
     conn.close()
 
-    # Exibe as mensagens na página de Conversas
     if not mensagens:
         st.info("Nenhuma conversa salva ainda.")
     else:
         for role, content in mensagens:
-            # O st.chat_message usa o ícone correto baseado no papel (user ou assistant)
             with st.chat_message(role):
                 st.markdown(content)
 
 elif st.session_state.page == "Configurações":
     st.header("⚙️ Configurações")
-    st.write("Personalize o comportamento do seu agente.")
-    
-    # Exemplo de configuração: Modo Tradutor
-    modo_tradutor = st.checkbox("Ativar Modo Tradutor", help="Se ativado, o agente focará em traduções.")
-    
-    if modo_tradutor:
-        st.success("Modo Tradutor Ativado!")
-    else:
-        st.info("Modo Assistente Padrão Ativo.")
-        
-    st.write("---")
+    modo_tradutor = st.checkbox("Ativar Modo Tradutor")
     if st.button("Limpar Histórico de Chat"):
         conn = sqlite3.connect('historico_chat.db')
         c = conn.cursor()
         c.execute("DELETE FROM chats")
         conn.commit()
         conn.close()
-        st.warning("Histórico apagado com sucesso!")
+        st.warning("Histórico apagado!")
         st.rerun()
-
-else:
-    st.header(f"Página: {st.session_state.page}")
-    st.write("Conteúdo em desenvolvimento...")
