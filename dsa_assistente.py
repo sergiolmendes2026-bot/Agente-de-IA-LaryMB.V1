@@ -98,7 +98,24 @@ if st.session_state.page == "Início":
 
 elif st.session_state.page == "Conversas":
     st.header("💬 Conversas")
-    st.write("Aqui você verá seu histórico completo.")
+    st.write("Aqui estão suas interações salvas:")
+    
+    # Conecta ao banco de dados para buscar o histórico
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    # Busca todas as mensagens ordenadas pela ordem que foram salvas
+    c.execute("SELECT role, content FROM chats ORDER BY id ASC")
+    mensagens = c.fetchall()
+    conn.close()
+
+    # Exibe as mensagens na página de Conversas
+    if not mensagens:
+        st.info("Nenhuma conversa salva ainda.")
+    else:
+        for role, content in mensagens:
+            # O st.chat_message usa o ícone correto baseado no papel (user ou assistant)
+            with st.chat_message(role):
+                st.markdown(content)
 
 elif st.session_state.page == "Configurações":
     st.header("⚙️ Configurações")
