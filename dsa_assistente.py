@@ -3,10 +3,10 @@ from groq import Groq
 import sqlite3
 import datetime
 
-# --- CONFIGURAÇÃO DA PÁGINA ---
+# --- CONFIGURAÇÃO ---
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
-# --- BANCO DE DADOS (Persistência do Histórico) ---
+# --- BANCO DE DADOS ---
 def init_db():
     conn = sqlite3.connect('historico_chat.db')
     c = conn.cursor()
@@ -25,16 +25,11 @@ def salvar_mensagem(role, content):
 
 init_db()
 
-# --- CSS PERSONALIZADO ---
+# --- CSS GLOBAL ---
 st.markdown("""
-    <h1 style="text-align: center; color: white;">
-        Como posso 
-        <span style="color: #8B5CF6;">te ajudar</span> 
-        hoje?
-    </h1>
-    <p style="text-align: center; color: #888;">
-        Seu guia inteligente para respostas, explicações e referências.
-    </p>
+    <style>
+    .stApp { background-color: #050505; color: #ffffff; }
+    </style>
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR ---
@@ -48,10 +43,11 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    
-    # Navegação
     if st.button("🏠 Início", use_container_width=True, key="btn_i"): st.session_state.page = "Início"
     if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
+    if st.button("⭐ Favoritos", use_container_width=True, key="btn_f"): st.session_state.page = "Favoritos"
+    if st.button("🕒 Histórico", use_container_width=True, key="btn_h"): st.session_state.page = "Histórico"
+    if st.button("⚙️ Configurações", use_container_width=True, key="btn_co"): st.session_state.page = "Configurações"
     
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
@@ -63,18 +59,25 @@ with st.sidebar:
 # --- LÓGICA DE NAVEGAÇÃO ---
 if "page" not in st.session_state: st.session_state.page = "Início"
 
-# --- PÁGINA INÍCIO (CHAT) ---
+# --- PÁGINA INÍCIO ---
 if st.session_state.page == "Início":
-    st.markdown('<h1 style="text-align:center;">Como posso te ajudar hoje?</h1>', unsafe_allow_html=True)
+    # Título Único e Estilizado
+    st.markdown("""
+        <h1 style="text-align: center; color: white;">
+            Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?
+        </h1>
+        <p style="text-align: center; color: #888; margin-bottom: 30px;">
+            Seu guia inteligente para respostas, explicações e referências.
+        </p>
+    """, unsafe_allow_html=True)
     
-    # Carregar mensagens do banco de dados
+    # Exibir histórico
     conn = sqlite3.connect('historico_chat.db')
     c = conn.cursor()
     c.execute("SELECT role, content FROM chats ORDER BY id ASC")
     mensagens = c.fetchall()
     conn.close()
 
-    # Exibir histórico
     for role, content in mensagens:
         with st.chat_message(role):
             st.markdown(content)
@@ -84,23 +87,19 @@ if st.session_state.page == "Início":
         if not api_key:
             st.error("Insira sua API Key na lateral.")
         else:
-            # Salvar usuário no banco
             salvar_mensagem("user", prompt)
-            
-            # Chamar Groq
             client = Groq(api_key=api_key)
             response = client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
                 model="llama-3.3-70b-versatile"
             )
             resposta = response.choices[0].message.content
-            
-            # Salvar IA no banco
             salvar_mensagem("assistant", resposta)
             st.rerun()
 
-# --- PÁGINA CONVERSAS ---
 elif st.session_state.page == "Conversas":
     st.header("💬 Conversas")
-    st.write("Aqui ficará o seu histórico consolidado.")
-    # Você pode copiar a mesma lógica de consulta do banco aqui para exibir tudo
+    st.write("Esta área de navegação está pronta para receber seus dados.")
+else:
+    st.header(f"Página: {st.session_state.page}")
+    st.write("Conteúdo em desenvolvimento...")
