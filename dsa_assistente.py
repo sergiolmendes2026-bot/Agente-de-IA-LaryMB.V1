@@ -19,15 +19,36 @@ st.markdown("""
 
 # --- SIDEBAR COM O VISUAL DESEJADO ---
 with st.sidebar:
-    # Avatar e Nome (Como na imagem)
+    # 1. Avatar e Status (Visual Premium)
     st.markdown("""
-        <div class="sidebar-avatar">
+        <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
-            <h3>Agente de IA Larymb.v1</h3>
-            <p>v1.0.0</p>
-            <div class="status-online">● Status: Online</div>
+            <h3 style="margin-top: 10px;">Agente de IA Larymb.v1</h3>
+            <p style="font-size: 0.8em; color: #888;">v1.0.0</p>
+            <div style="color: #00ff41; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # 2. Navegação
+    if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
+    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
+    if st.button("⭐ Favoritos", use_container_width=True): st.session_state.page = "Favoritos"
+    if st.button("🕒 Histórico", use_container_width=True): st.session_state.page = "Histórico"
+    if st.button("⚙️ Configurações", use_container_width=True): st.session_state.page = "Configurações"
+    
+    st.markdown("---")
+    
+    # 3. Informações de Suporte (Fixas no final da sidebar)
+    st.markdown("""
+        <div style="font-size: 0.85em; color: #ccc; margin-top: 20px;">
+            <p><strong>Desenvolvido para auxiliar em suas dúvidas.</strong><br>
+            IA pode cometer erros. Sempre verifique as respostas.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.link_button("✉️ Email para Suporte", "mailto:seuemail@exemplo.com", use_container_width=True)
     
     st.markdown("---")
     
