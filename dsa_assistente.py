@@ -3,15 +3,32 @@ from groq import Groq
 import sqlite3
 import datetime
 
-# --- CONFIGURAÇÃO ---
+# --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
-# --- CSS PARA DARK THEME E LAYOUT ---
+# --- BANCO DE DADOS (Persistência do Histórico) ---
+def init_db():
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS chats 
+                 (id INTEGER PRIMARY KEY, role TEXT, content TEXT, timestamp TEXT)''')
+    conn.commit()
+    conn.close()
+
+def salvar_mensagem(role, content):
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO chats (role, content, timestamp) VALUES (?, ?, ?)",
+              (role, content, datetime.datetime.now().isoformat()))
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# --- CSS PERSONALIZADO ---
 st.markdown("""
     <style>
     .stApp { background-color: #050505; color: #ffffff; }
-    .main-title { font-size: 2.5em; font-weight: bold; text-align: center; margin-top: 20px; }
-    .sub-title { text-align: center; color: #888; margin-bottom: 30px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -32,9 +49,6 @@ with st.sidebar:
     if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
     
     st.markdown("---")
-    
-    # CAMPO DA API KEY (AQUI!)
-    st.caption("Configurações")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
     
     st.markdown("---")
@@ -44,38 +58,44 @@ with st.sidebar:
 # --- LÓGICA DE NAVEGAÇÃO ---
 if "page" not in st.session_state: st.session_state.page = "Início"
 
-# --- PÁGINA DE INÍCIO (COM CHAT) ---
+# --- PÁGINA INÍCIO (CHAT) ---
 if st.session_state.page == "Início":
-    st.markdown('<div class="main-title">Como posso te ajudar hoje?</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-title">Seu guia inteligente para respostas e referências.</div>', unsafe_allow_html=True)
+    st.markdown('<h1 style="text-align:center;">Como posso te ajudar hoje?</h1>', unsafe_allow_html=True)
     
-    # Inicializa chat
-    if "messages" not in st.session_state: st.session_state.messages = []
-    
-    # Exibe histórico
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+    # Carregar mensagens do banco de dados
+    conn = sqlite3.connect('historico_chat.db')
+    c = conn.cursor()
+    c.execute("SELECT role, content FROM chats ORDER BY id ASC")
+    mensagens = c.fetchall()
+    conn.close()
+
+    # Exibir histórico
+    for role, content in mensagens:
+        with st.chat_message(role):
+            st.markdown(content)
             
-    # CAMPO PARA DIGITAR PERGUNTAS (AQUI!)
+    # Entrada do Usuário
     if prompt := st.chat_input("Qual sua dúvida?"):
         if not api_key:
-            st.error("Por favor, insira sua API Key na barra lateral.")
+            st.error("Insira sua API Key na lateral.")
         else:
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"): st.markdown(prompt)
+            # Salvar usuário no banco
+            salvar_mensagem("user", prompt)
             
-            with st.chat_message("assistant"):
-                client = Groq(api_key=api_key)
-                response = client.chat.completions.create(
-                    messages=st.session_state.messages,
-                    model="llama-3.3-70b-versatile"
-                )
-                resposta = response.choices[0].message.content
-                st.markdown(resposta)
-                st.session_state.messages.append({"role": "assistant", "content": resposta})
+            # Chamar Groq
+            client = Groq(api_key=api_key)
+            response = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model="llama-3.3-70b-versatile"
+            )
+            resposta = response.choices[0].message.content
+            
+            # Salvar IA no banco
+            salvar_mensagem("assistant", resposta)
+            st.rerun()
 
-# --- OUTRAS PÁGINAS ---
+# --- PÁGINA CONVERSAS ---
 elif st.session_state.page == "Conversas":
     st.header("💬 Conversas")
-    st.write("Histórico de conversas em desenvolvimento.")
+    st.write("Aqui ficará o seu histórico consolidado.")
+    # Você pode copiar a mesma lógica de consulta do banco aqui para exibir tudo
