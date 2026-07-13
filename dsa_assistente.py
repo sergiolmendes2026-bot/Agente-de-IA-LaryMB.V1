@@ -6,7 +6,7 @@ import datetime
 # --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
-# --- CSS PERSONALIZADO (O segredo do visual) ---
+# --- CSS PERSONALIZADO ---
 st.markdown("""
     <style>
     .stApp { background-color: #050505; color: #ffffff; }
@@ -17,9 +17,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- SIDEBAR COM O VISUAL DESEJADO ---
+# --- SIDEBAR (LIMPA E CORRIGIDA) ---
 with st.sidebar:
-    # Avatar e Status
     st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
@@ -30,75 +29,40 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Navegação com CHAVES ÚNICAS (isso resolve o erro)
-    if st.button("🏠 Início", use_container_width=True, key="btn_inicio"): 
-        st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True, key="btn_conversas"): 
-        st.session_state.page = "Conversas"
-    if st.button("⭐ Favoritos", use_container_width=True, key="btn_favoritos"): 
-        st.session_state.page = "Favoritos"
-    if st.button("🕒 Histórico", use_container_width=True, key="btn_historico"): 
-        st.session_state.page = "Histórico"
-    if st.button("⚙️ Configurações", use_container_width=True, key="btn_config"): 
-        st.session_state.page = "Configurações"
+    # Navegação ÚNICA
+    if st.button("🏠 Início", use_container_width=True, key="btn_inicio"): st.session_state.page = "Início"
+    if st.button("💬 Conversas", use_container_width=True, key="btn_conv"): st.session_state.page = "Conversas"
+    if st.button("⭐ Favoritos", use_container_width=True, key="btn_fav"): st.session_state.page = "Favoritos"
+    if st.button("🕒 Histórico", use_container_width=True, key="btn_hist"): st.session_state.page = "Histórico"
+    if st.button("⚙️ Configurações", use_container_width=True, key="btn_conf"): st.session_state.page = "Configurações"
     
     st.markdown("---")
     
-    # Rodapé da sidebar
-    st.markdown("""
-        <div style="font-size: 0.85em; color: #ccc;">
-            <p><strong>Desenvolvido para auxiliar em suas dúvidas.</strong><br>
-            IA pode cometer erros. Sempre verifique as respostas.</p>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    st.link_button("✉️ Email para Suporte", "mailto:seuemail@exemplo.com", use_container_width=True)
-    
-    st.markdown("---")
-    
-    # 2. Navegação
-    if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
-    if st.button("⭐ Favoritos", use_container_width=True): st.session_state.page = "Favoritos"
-    if st.button("🕒 Histórico", use_container_width=True): st.session_state.page = "Histórico"
-    if st.button("⚙️ Configurações", use_container_width=True): st.session_state.page = "Configurações"
-    
-    st.markdown("---")
-    
-    # 3. Informações de Suporte (Fixas no final da sidebar)
-    st.markdown("""
-        <div style="font-size: 0.85em; color: #ccc; margin-top: 20px;">
-            <p><strong>Desenvolvido para auxiliar em suas dúvidas.</strong><br>
-            IA pode cometer erros. Sempre verifique as respostas.</p>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    st.link_button("✉️ Email para Suporte", "mailto:seuemail@exemplo.com", use_container_width=True)
-    
-    st.markdown("---")
-    
-    # Botões de Navegação com ícones
-    if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
-    
-    st.markdown("---")
-    
-    # Histórico (Onde ficam os botões dinâmicos)
+    # Histórico de Conversas (Área de scroll)
     st.subheader("Histórico")
     with st.container(height=300):
-        # Aqui entra a lógica de listar conversas do banco (como fizemos antes)
-        pass 
+        st.write("Suas conversas salvas aparecerão aqui.")
+    
+    st.markdown("---")
+    
+    # Rodapé de Suporte
+    st.markdown("""
+        <div style="font-size: 0.85em; color: #ccc;">
+            <p><strong>Desenvolvido para auxiliar.</strong><br>
+            IA pode cometer erros. Sempre verifique as respostas.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    st.link_button("✉️ Email para Suporte", "mailto:seuemail@exemplo.com", use_container_width=True)
 
-# --- ÁREA PRINCIPAL (Visual Bem-vindo) ---
+# --- ÁREA PRINCIPAL ---
 if "page" not in st.session_state: st.session_state.page = "Início"
 
 if st.session_state.page == "Início":
     st.markdown('<div class="main-title">Como posso te ajudar hoje?</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-title">Seu guia inteligente para respostas, explicações e referências.</div>', unsafe_allow_html=True)
     
-    # Colunas para os cards de atalho
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.button("Respostas Inteligentes", use_container_width=True)
-    with col2: st.button("Explicações Detalhadas", use_container_width=True)
-    with col3: st.button("Referências Confiáveis", use_container_width=True)
-    with col4: st.button("Rápido e Eficiente", use_container_width=True)
+    with col1: st.button("Respostas Inteligentes", use_container_width=True, key="a1")
+    with col2: st.button("Explicações Detalhadas", use_container_width=True, key="a2")
+    with col3: st.button("Referências Confiáveis", use_container_width=True, key="a3")
+    with col4: st.button("Rápido e Eficiente", use_container_width=True, key="a4")
