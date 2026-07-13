@@ -99,7 +99,30 @@ if st.session_state.page == "Início":
 
 elif st.session_state.page == "Conversas":
     st.header("💬 Conversas")
-    st.write("Esta área de navegação está pronta para receber seus dados.")
+    st.write("Aqui você verá seu histórico completo.")
+
+elif st.session_state.page == "Configurações":
+    st.header("⚙️ Configurações")
+    st.write("Personalize o comportamento do seu agente.")
+    
+    # Exemplo de configuração: Modo Tradutor
+    modo_tradutor = st.checkbox("Ativar Modo Tradutor", help="Se ativado, o agente focará em traduções.")
+    
+    if modo_tradutor:
+        st.success("Modo Tradutor Ativado!")
+    else:
+        st.info("Modo Assistente Padrão Ativo.")
+        
+    st.write("---")
+    if st.button("Limpar Histórico de Chat"):
+        conn = sqlite3.connect('historico_chat.db')
+        c = conn.cursor()
+        c.execute("DELETE FROM chats")
+        conn.commit()
+        conn.close()
+        st.warning("Histórico apagado com sucesso!")
+        st.rerun()
+
 else:
     st.header(f"Página: {st.session_state.page}")
     st.write("Conteúdo em desenvolvimento...")
