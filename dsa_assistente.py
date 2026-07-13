@@ -283,18 +283,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-    
-    /* Estilização da Sidebar (A parte roxa que você pediu) */
-    [data-testid="stSidebar"] {
-        background-color: #4B0082; 
-    }
-    
-    /* Ajuste para o texto dentro da sidebar ficar branco */
-    [data-testid="stSidebar"] * {
-        color: white !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 # --- SIDEBAR ---
 with st.sidebar:
