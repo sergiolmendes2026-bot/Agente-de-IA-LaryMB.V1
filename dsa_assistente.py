@@ -19,15 +19,40 @@ st.markdown("""
 
 # --- SIDEBAR COM O VISUAL DESEJADO ---
 with st.sidebar:
-    # 1. Avatar e Status (Visual Premium)
+    # Avatar e Status
     st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3 style="margin-top: 10px;">Agente de IA Larymb.v1</h3>
-            <p style="font-size: 0.8em; color: #888;">v1.0.0</p>
             <div style="color: #00ff41; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Navegação com CHAVES ÚNICAS (isso resolve o erro)
+    if st.button("🏠 Início", use_container_width=True, key="btn_inicio"): 
+        st.session_state.page = "Início"
+    if st.button("💬 Conversas", use_container_width=True, key="btn_conversas"): 
+        st.session_state.page = "Conversas"
+    if st.button("⭐ Favoritos", use_container_width=True, key="btn_favoritos"): 
+        st.session_state.page = "Favoritos"
+    if st.button("🕒 Histórico", use_container_width=True, key="btn_historico"): 
+        st.session_state.page = "Histórico"
+    if st.button("⚙️ Configurações", use_container_width=True, key="btn_config"): 
+        st.session_state.page = "Configurações"
+    
+    st.markdown("---")
+    
+    # Rodapé da sidebar
+    st.markdown("""
+        <div style="font-size: 0.85em; color: #ccc;">
+            <p><strong>Desenvolvido para auxiliar em suas dúvidas.</strong><br>
+            IA pode cometer erros. Sempre verifique as respostas.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.link_button("✉️ Email para Suporte", "mailto:seuemail@exemplo.com", use_container_width=True)
     
     st.markdown("---")
     
