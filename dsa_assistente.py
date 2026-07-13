@@ -4,30 +4,23 @@ from groq import Groq
 # Configuração da página
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
-# --- CSS Profissional ---
+# --- CSS PARA ESTILIZAÇÃO DARK ---
 st.markdown("""
     <style>
     .stApp { background-color: #0d0f14; color: #ffffff; font-family: 'Inter', sans-serif; }
-    .card { background-color: #161a22; border: 1px solid #374151; border-radius: 16px; padding: 20px; text-align: center; }
-    .sidebar-card { background-color: #161a22; padding: 15px; border-radius: 10px; border: 1px solid #374151; }
+    .sidebar-card { background-color: #161a22; padding: 15px; border-radius: 10px; border: 1px solid #374151; margin-top: 20px; }
+    #MainMenu, footer, header { visibility: hidden; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- PROMPT (Estruturado em lista para evitar erros de sintaxe) ---
-prompt_list = [
-    "Você é o Agente de IA LaryMB.V2, um assistente multifuncional.",
-    "Missão: Resolver dúvidas, ensinar conceitos, organizar informações e auxiliar na tomada de decisões.",
-    "Prioridade: 1. Segurança, 2. Precisão, 3. Clareza, 4. Organização.",
-    "Padrão de resposta: Resumo, Explicação, Passo a Passo, Boas Práticas, Observações.",
-    "Formatação: Utilize títulos, listas, tabelas e código formatado."
-]
-CUSTOM_PROMPT = "\n".join(prompt_list)
+# --- PROMPT DE SISTEMA ---
+CUSTOM_PROMPT = "Você é o Agente de IA LaryMB.V2, um assistente especializado em suporte técnico e educação. Seja organizado, use tabelas e listas."
 
-# --- ESTADO DA PÁGINA ---
+# --- ESTADO DE NAVEGAÇÃO ---
 if 'page' not in st.session_state:
     st.session_state.page = "Início"
 
-# --- SIDEBAR (Com botões funcionais) ---
+# --- SIDEBAR ---
 with st.sidebar:
     st.markdown("## 🤖 Agente de IA Larymb.v1")
     st.caption("v1.0.0")
@@ -42,29 +35,29 @@ with st.sidebar:
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password")
     
-    st.markdown("<div class='sidebar-card'><h4>Precisa de ajuda?</h4><p>IA pode cometer erros. Sempre verifique as respostas.</p></div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class='sidebar-card'>
+        <h4 style='color: white; margin-top: 0;'>Precisa de ajuda?</h4>
+        <p style='font-size: 0.85em; color: #9ca3af;'>IA pode cometer erros. Sempre verifique as informações.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
 
-# --- INTERFACE PRINCIPAL ---
+# --- RENDERIZAÇÃO DA PÁGINA ---
 if st.session_state.page == "Início":
     st.markdown("<h1 style='text-align: center;'>Como posso te ajudar hoje?</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #9ca3af;'>Seu guia inteligente para respostas, explicações e referências.</p>", unsafe_allow_html=True)
     
-    # Grid de Cards
-    cols = st.columns(4)
-    features = ["Respostas", "Explicações", "Referências", "Rápido"]
-    for i, col in enumerate(cols):
-        with col:
-            st.markdown(f"<div class='card'><b>{features[i]}</b></div>", unsafe_allow_html=True)
-
-    # Lógica de Chat na página de início
+    # Lógica de Chat
     if "messages" not in st.session_state: st.session_state.messages = []
-    
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]): st.markdown(msg["content"])
 
     if prompt := st.chat_input("Digite sua dúvida aqui..."):
         if not api_key:
-            st.error("Insira a API Key na barra lateral.")
+            st.error("Por favor, insira sua API Key na lateral.")
             st.stop()
         
         client = Groq(api_key=api_key)
@@ -80,6 +73,6 @@ if st.session_state.page == "Início":
             st.markdown(ans)
             st.session_state.messages.append({"role": "assistant", "content": ans})
 
-elif st.session_state.page != "Início":
+else:
     st.header(f"Página: {st.session_state.page}")
-    st.write("Conteúdo em desenvolvimento...")
+    st.write("Esta área de navegação está pronta para receber seus dados.")
