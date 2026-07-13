@@ -290,7 +290,7 @@ with st.sidebar:
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3>Agente de IA Larymb.v1</h3>
-            <div style="color: #D8BFD8; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
+            <div style="color: #D8BFD8; font-size: 0.8em; font-weight: bold;">Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
     
