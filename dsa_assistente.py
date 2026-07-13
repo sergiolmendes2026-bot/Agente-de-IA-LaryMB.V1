@@ -63,7 +63,8 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
-    st.link_button("✉️ Email para Suporte", "mailto:seuemail@exemplo.com", use_container_width=True)
+    st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)
+    st.sidebar.link_button("WhatsApp de Suporte", "https://wa.me/11994376755?text=Olá,%20preciso%20de%20ajuda")
 
 # --- LÓGICA DE NAVEGAÇÃO ---
 if "page" not in st.session_state: st.session_state.page = "Início"
