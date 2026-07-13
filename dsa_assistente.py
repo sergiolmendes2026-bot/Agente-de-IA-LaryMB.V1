@@ -60,7 +60,6 @@ if "page" not in st.session_state: st.session_state.page = "Início"
 
 # --- PÁGINA INÍCIO ---
 if st.session_state.page == "Início":
-    # Título Único e Estilizado
     st.markdown("""
         <h1 style="text-align: center; color: white;">
             Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?
@@ -87,14 +86,13 @@ if st.session_state.page == "Início":
             st.error("Insira sua API Key na lateral.")
         else:
             salvar_mensagem("user", prompt)
+            
             client = Groq(api_key=api_key)
-         response = client.chat.completions.create(
-    messages=[
-        {"role": "system", "content": "Você é um tradutor especialista. Sempre que o usuário enviar um texto, traduza-o para o idioma oposto (se estiver em inglês, traduza para português; se estiver em português, traduza para inglês)."},
-        {"role": "user", "content": prompt}
-    ],
-    model="llama-3.3-70b-versatile"
-)
+            response = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model="llama-3.3-70b-versatile"
+            )
+            
             resposta = response.choices[0].message.content
             salvar_mensagem("assistant", resposta)
             st.rerun()
