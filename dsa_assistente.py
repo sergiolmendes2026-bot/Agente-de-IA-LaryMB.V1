@@ -45,7 +45,6 @@ with st.sidebar:
     st.markdown("---")
     if st.button("🏠 Início", use_container_width=True, key="btn_i"): st.session_state.page = "Início"
     if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
-    if st.button("⭐ Favoritos", use_container_width=True, key="btn_f"): st.session_state.page = "Favoritos"
     if st.button("🕒 Histórico", use_container_width=True, key="btn_h"): st.session_state.page = "Histórico"
     if st.button("⚙️ Configurações", use_container_width=True, key="btn_co"): st.session_state.page = "Configurações"
     
