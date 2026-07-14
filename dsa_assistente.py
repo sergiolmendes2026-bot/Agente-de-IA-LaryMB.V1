@@ -266,7 +266,6 @@ def salvar_mensagem(role, content):
 init_db()
 
 # --- CSS GLOBAL ---
-# Usar r""" cria uma "raw string", o que impede o Python de interpretar qualquer caractere interno
 css = r"""
 <style>
 .stApp {
