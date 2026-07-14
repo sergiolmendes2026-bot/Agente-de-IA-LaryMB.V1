@@ -267,27 +267,28 @@ init_db()
 
 # --- CSS GLOBAL ---
 
-css = r"""
+# --- CSS GLOBAL ---
+css = """
 <style>
 .stApp {
     background-color: #05070a;
-    background-image: radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%), 
-                      radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px), 
-                      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image: radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%), radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px), linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     color: #ffffff;
 }
 
 [data-testid="stSidebar"] {
-    background-color: #4B0082 !important; 
-    border-right: 1px solid #2e303a; 
+    background-color: #4B0082 !important;
+    border-right: 1px solid #2e303a;
     padding-top: 2rem;
 }
 
-[data-testid="stSidebar"] * { 
-    color: #FAFAFA !important; 
+[data-testid="stSidebar"] * {
+    color: #FAFAFA !important;
 }
 </style>
+"""
+
+st.markdown(css, unsafe_allow_html=True)
 """
 
 # Injetamos o CSS usando a variável que criamos
