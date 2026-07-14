@@ -266,6 +266,7 @@ def salvar_mensagem(role, content):
 init_db()
 
 # --- CSS GLOBAL ---
+# O prefixo 'r' antes de """ cria uma raw string, evitando erros de interpretação
 css = r"""
 <style>
 .stApp {
@@ -289,6 +290,7 @@ css = r"""
 </style>
 """
 
+# Injetamos o CSS usando a variável que criamos
 st.markdown(css, unsafe_allow_html=True)
 
 # --- SIDEBAR (SEM DUPLICADOS) ---
