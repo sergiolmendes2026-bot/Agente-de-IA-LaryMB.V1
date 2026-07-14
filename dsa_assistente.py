@@ -67,6 +67,17 @@ with st.sidebar:
     st.markdown("---")
     st.info("Aviso: a IA pode cometer erros.", icon="ℹ️")
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
+    
+ st.markdown("""
+        <a href="https://wa.me/5511994376755" target="_blank" style="
+            display: flex; align-items: center; justify-content: left;
+            background-color: #262730; color: #FAFAFA; padding: 0.5rem;
+            border-radius: 0.5rem; text-decoration: none; border: 1px solid #464e5f;
+        ">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 10px;">
+            WhatsApp de Suporte
+        </a>
+    """, unsafe_allow_html=True)
 
 
 # --- NAVEGAÇÃO ---
