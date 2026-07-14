@@ -28,17 +28,32 @@ init_db()
 # --- CSS GLOBAL E SIDEBAR ---
 st.markdown("""
     <style>
-    /* Fundo da aplicação */
-    .stApp { background-color: #050505; color: #ffffff; }
-    
-    /* Estilização da Sidebar (A parte roxa que você pediu) */
-    [data-testid="stSidebar"] {
-        background-color: #4B0082; 
+    /* Fundo da aplicação com gradiente azulado elegante */
+    .stApp {
+        background: radial-gradient(circle at top right, #0F172A, #020617);
+        color: #ffffff;
     }
     
-    /* Ajuste para o texto dentro da sidebar ficar branco */
+    /* Estilização da Sidebar com tom azul profundo */
+    [data-testid="stSidebar"] {
+        background-color: #0F172A;
+        border-right: 1px solid #1E293B;
+    }
+    
+    /* Ajuste para o texto dentro da sidebar */
     [data-testid="stSidebar"] * {
+        color: #E2E8F0 !important;
+    }
+
+    /* Estilização dos botões da sidebar para combinar */
+    div.stButton > button {
+        background-color: #1E293B !important;
+        border: 1px solid #334155 !important;
         color: white !important;
+    }
+    div.stButton > button:hover {
+        background-color: #334155 !important;
+        border-color: #8B5CF6 !important;
     }
     </style>
 """, unsafe_allow_html=True)
