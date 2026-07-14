@@ -59,17 +59,22 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR ---
-# --- SIDEBAR ---
 with st.sidebar:
+    # Opção Recomendada: Usar o componente nativo do Streamlit para maior estabilidade
+    # Ele lida melhor com o redimensionamento e carregamento
+    st.image("https://img.freepik.com/vetores-premium/icone-de-robo-tecnologico-moderno_1122-345.jpg", 
+             width=150, # Aumentei para 150 para ficar bem grande
+             output_format="PNG")
+    
     st.markdown("""
-        <div style="text-align: center; padding-bottom: 20px;">
-            <img src="https://img.freepik.com/vetores-premium/icone-de-robo-tecnologico-moderno_1122-345.jpg" 
-                 width="100" 
-                 style="border-radius: 50%; display: block; margin: 0 auto; border: 2px solid #60A5FA;">
-            <h3>Agente de IA Larymb.v1</h3>
-            <div style="color: #60A5FA; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
+        <div style="text-align: center;">
+            <h3 style="margin-top: 10px;">Agente de IA Larymb.v1</h3>
+            <div style="color: #60A5FA; font-size: 0.9em; font-weight: bold; margin-bottom: 20px;">
+                ● Status: Online
+            </div>
         </div>
     """, unsafe_allow_html=True)
+    
     
     st.markdown("---")
     if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
