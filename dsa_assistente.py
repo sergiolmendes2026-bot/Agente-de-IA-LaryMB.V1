@@ -64,15 +64,10 @@ with st.sidebar:
     api_key = st.text_input("Insira sua chave API Key Groq", type="password", key="api_key_input")
     
     st.markdown("---")
-    st.info("Aviso:  IA pode pode gerar respostas imprecisas, incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente. ", icon="ℹ️")
-    st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
+    st.info("Aviso: IA pode gerar respostas imprecisas. Sempre verifique informações críticas.", icon="ℹ️")
     
-    # Botão WhatsApp corrigido (indentação alinhada com os outros elementos)
-   st.link_button(
-        "💬 WhatsApp de Suporte", 
-        "https://wa.me/5511994376755", 
-        use_container_width=True
-    )
+    st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
+    st.link_button("💬 WhatsApp de Suporte", "https://wa.me/5511994376755", use_container_width=True)
 
 # --- NAVEGAÇÃO ---
 if "page" not in st.session_state: st.session_state.page = "Início"
