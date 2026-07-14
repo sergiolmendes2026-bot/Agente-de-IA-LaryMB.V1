@@ -266,7 +266,8 @@ def salvar_mensagem(role, content):
 init_db()
 
 # --- CSS GLOBAL ---
-css = """
+# Usar r""" cria uma "raw string", o que impede o Python de interpretar qualquer caractere interno
+css = r"""
 <style>
 .stApp {
     background-color: #05070a;
@@ -289,7 +290,6 @@ css = """
 </style>
 """
 
-# Injetamos o CSS de uma vez só
 st.markdown(css, unsafe_allow_html=True)
 
 # --- SIDEBAR (SEM DUPLICADOS) ---
