@@ -68,7 +68,7 @@ with st.sidebar:
     st.info("Aviso: a IA pode cometer erros.", icon="ℹ️")
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
     
- st.markdown("""
+     st.markdown("""
         <a href="https://wa.me/5511994376755" target="_blank" style="
             display: flex; align-items: center; justify-content: left;
             background-color: #262730; color: #FAFAFA; padding: 0.5rem;
