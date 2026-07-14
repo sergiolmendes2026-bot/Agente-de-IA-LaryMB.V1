@@ -63,7 +63,11 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
-    st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)
+    st.link_button(
+    "✉️ Email para Suporte", 
+    "mailto:sergiolmendes2026@gmail.com?subject=Suporte%20Larymb.v1", 
+    use_container_width=True
+)
    
 # --- Configuração do Link e Número ---
 NUMERO_TELEFONE = "5511994376755"
