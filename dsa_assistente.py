@@ -267,10 +267,13 @@ init_db()
 
 # --- CSS GLOBAL ---
 st.markdown("""
-    <style>
-    .stApp {
-        background-color: #05070a;
-        background-image: 
+<style>
+.stApp {
+    background-color: #05070a;
+    background-image: ... ;
+}
+</style>
+""", unsafe_allow_html=True)
             radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%),
             radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px),
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
