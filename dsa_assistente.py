@@ -8,7 +8,6 @@ import textwrap
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
 # --- CSS GLOBAL ---
-# O textwrap.dedent remove espaços extras que causam IndentationError
 css = textwrap.dedent("""
 <style>
 .stApp {
@@ -68,7 +67,8 @@ with st.sidebar:
     st.info("Aviso: a IA pode cometer erros.", icon="ℹ️")
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
     
-     st.markdown("""
+    # Botão WhatsApp corrigido (indentação alinhada com os outros elementos)
+    st.markdown("""
         <a href="https://wa.me/5511994376755" target="_blank" style="
             display: flex; align-items: center; justify-content: left;
             background-color: #262730; color: #FAFAFA; padding: 0.5rem;
@@ -78,7 +78,6 @@ with st.sidebar:
             WhatsApp de Suporte
         </a>
     """, unsafe_allow_html=True)
-
 
 # --- NAVEGAÇÃO ---
 if "page" not in st.session_state: st.session_state.page = "Início"
