@@ -59,6 +59,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR COMPLETO (SEM ROBO) ---
+# --- SIDEBAR COMPLETO (Corrigido) ---
 with st.sidebar:
     st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
@@ -68,10 +69,14 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    # Botões alinhados dentro do 'with'
-    if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
-    if st.button("⚙️ Configurações", use_container_width=True): st.session_state.page = "Configurações"
+    
+    # Adicionamos o parâmetro 'key' para tornar cada botão único
+    if st.button("🏠 Início", use_container_width=True, key="btn_inicio"): 
+        st.session_state.page = "Início"
+    if st.button("💬 Conversas", use_container_width=True, key="btn_conversas"): 
+        st.session_state.page = "Conversas"
+    if st.button("⚙️ Configurações", use_container_width=True, key="btn_config"): 
+        st.session_state.page = "Configurações"
     
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password")
@@ -80,8 +85,8 @@ with st.sidebar:
     st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
 
-    # Botão WhatsApp dentro do 'with'
-    URL_WHATSAPP = f"https://wa.me/5511994376755?text=Olá,%20preciso%20de%20ajuda."
+    # Botão WhatsApp
+    URL_WHATSAPP = "https://wa.me/5511994376755?text=Olá,%20preciso%20de%20ajuda."
     st.markdown(f"""
         <a href="{URL_WHATSAPP}" target="_blank" style="
             display: flex; align-items: center; justify-content: left;
