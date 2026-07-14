@@ -51,7 +51,7 @@ with st.sidebar:
     st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
             <h2 style="margin-top: 10px;">Agente de IA Larymb.v1</h2>
-            <div style="color: #22C55E; font-size: 0.9em; font-weight: bold;">● Status: Online</div>
+            <div style="color: #22c55e; font-size: 0.9em; font-weight: bold;">● Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
     
