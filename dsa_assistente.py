@@ -63,7 +63,7 @@ with st.sidebar:
     if st.button("⚙️ Configurações", use_container_width=True, key="nav_conf"): st.session_state.page = "Configurações"
     
     st.markdown("---")
-    api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
+    api_key = st.text_input("Insira sua chave API Key Groq", type="password", key="api_key_input")
     
     st.markdown("---")
     st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
