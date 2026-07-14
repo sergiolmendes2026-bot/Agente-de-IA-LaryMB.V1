@@ -20,8 +20,13 @@ css = textwrap.dedent("""
     border-right: 1px solid #2e303a;
     padding-top: 2rem;
 }
-[data-testid="stSidebar"] * {
-    color: #FAFAFA !important;
+/* Regra específica para forçar o verde no status */
+[data-testid="stSidebar"] div.status-verde {
+    color: #22c55e !important;
+}
+/* Mantém o restante branco */
+[data-testid="stSidebar"] *:not(.status-verde) { 
+    color: #FAFAFA !important; 
 }
 </style>
 """)
