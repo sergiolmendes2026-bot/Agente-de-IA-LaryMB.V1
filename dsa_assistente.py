@@ -278,7 +278,7 @@ css = """
 }
 
 [data-testid="stSidebar"] {
-    background-color: #4B0082 !important;
+    background-color: #4B0082 !important; 
     border-right: 1px solid #2e303a; 
     padding-top: 2rem;
 }
@@ -289,6 +289,7 @@ css = """
 </style>
 """
 
+# Injetamos o CSS de uma vez só
 st.markdown(css, unsafe_allow_html=True)
 
 # --- SIDEBAR (SEM DUPLICADOS) ---
