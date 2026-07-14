@@ -25,7 +25,7 @@ def salvar_mensagem(role, content):
 
 init_db()
 
-# --- CSS GLOBAL E SIDEBAR ---
+
 # --- CSS GLOBAL E SIDEBAR ---
 st.markdown("""
     <style>
@@ -90,9 +90,10 @@ st.markdown("""
 with st.sidebar:
     st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
-            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
+            <!-- Substitua a linha abaixo pela nova imagem -->
+            <img src="https://img.freepik.com/vetores-premium/icone-de-robo-tecnologico-moderno_1122-345.jpg" width="100" style="border-radius: 50%;">
             <h3>Agente de IA Larymb.v1</h3>
-            <div style="color: #D8BFD8; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
+            <div style="color: #60A5FA; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
     
