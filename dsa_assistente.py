@@ -120,12 +120,13 @@ MENSAGEM_PADRAO = "Olá, preciso de ajuda com o Agente de IA."
 URL_WHATSAPP = f"https://wa.me/{NUMERO_TELEFONE}?text={MENSAGEM_PADRAO.replace(' ', '%20')}"
 
 # --- Inserção do Ícone Customizado via HTML ---
+# --- Inserção do Ícone Customizado via HTML ---
 st.sidebar.markdown(
     f"""
     <a href="{URL_WHATSAPP}" target="_blank" style="
         display: flex;
         align-items: center;
-        justify-content: left;
+        justify-content: center; /* Centraliza o conteúdo */
         background-color: #262730;
         color: #FAFAFA;
         padding: 0.5rem 1rem;
@@ -139,9 +140,10 @@ st.sidebar.markdown(
         transition: border-color 300ms, background-color 300ms;
         width: 100%;
         box-sizing: border-box;
+        flex-direction: column; /* Alinha o ícone acima do texto */
     " onmouseover="this.style.borderColor='#FF4B4B'; this.style.backgroundColor='#2e303a'" onmouseout="this.style.borderColor='#464e5f'; this.style.backgroundColor='#262730'">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 10px;">
-        WhatsApp de Suporte
+        <img src="{sua_imagem_robo}" width="100" style="margin-bottom: 10px; border-radius: 50%;"> 
+        <span style="text-align: center;">WhatsApp de Suporte</span>
     </a>
     """, unsafe_allow_html=True
 )
