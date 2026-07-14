@@ -266,11 +266,14 @@ def salvar_mensagem(role, content):
 init_db()
 
 # --- CSS GLOBAL ---
-st.markdown("""
+css = """
 <style>
 .stApp {
     background-color: #05070a;
-    background-image: radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%), radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px), linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image: radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%), 
+                      radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px), 
+                      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     color: #ffffff;
 }
 
@@ -284,7 +287,9 @@ st.markdown("""
     color: #FAFAFA !important; 
 }
 </style>
-""", unsafe_allow_html=True)
+"""
+
+st.markdown(css, unsafe_allow_html=True)
 
 # --- SIDEBAR (SEM DUPLICADOS) ---
 with st.sidebar:
