@@ -64,7 +64,7 @@ with st.sidebar:
     api_key = st.text_input("Insira sua chave API Key Groq", type="password", key="api_key_input")
     
     st.markdown("---")
-    st.info("Aviso:  IA pode pode gerar resposta imprecisas, incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente. ", icon="ℹ️")
+    st.info("Aviso:  IA pode pode gerar respostas imprecisas, incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente. ", icon="ℹ️")
     st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
     
     # Botão WhatsApp corrigido (indentação alinhada com os outros elementos)
