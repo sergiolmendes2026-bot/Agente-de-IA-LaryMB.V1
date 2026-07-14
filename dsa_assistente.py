@@ -26,38 +26,66 @@ def salvar_mensagem(role, content):
 init_db()
 
 # --- CSS GLOBAL E SIDEBAR ---
+# --- CSS GLOBAL E SIDEBAR ---
 st.markdown("""
     <style>
-    /* Fundo da aplicação com gradiente azulado elegante */
+    /* Fundo da aplicação com o gradiente e partículas da imagem de referência */
     .stApp {
-        background: radial-gradient(circle at top right, #0F172A, #020617);
+        background-color: #05070a; /* Cor de fundo de fallback */
+        background-image: 
+            /* Camada 1: Gradiente Azul Escuro (Fundo profundo) */
+            radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%),
+            /* Camada 2: Efeito de Textura/Partículas (Pequenos pontos) */
+            radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px),
+            /* Camada 3: Linhas de Grade/Ondas sutis */
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        
+        background-position: center bottom, center center, 50px 50px, 50px 50px;
+        background-size: auto, 100px 100px, 50px 50px, 50px 50px;
+        background-repeat: no-repeat, repeat, repeat, repeat;
         color: #ffffff;
+        /* Certifica-se de que o fundo ocupe toda a tela */
+        height: 100vh; 
     }
     
-    /* Estilização da Sidebar com tom azul profundo */
+    /* Estilização da Sidebar (Mantendo a estrutura original) */
     [data-testid="stSidebar"] {
-        background-color: #0F172A;
-        border-right: 1px solid #1E293B;
+        /* Mantém a cor original da sua sidebar, mas com leve transparência */
+        background-color: rgba(22, 23, 31, 0.9); 
+        /* Borda sutil à direita */
+        border-right: 1px solid #2e303a; 
+        padding-top: 2rem;
     }
     
-    /* Ajuste para o texto dentro da sidebar */
+    /* Ajuste para o texto dentro da sidebar ficar branco */
     [data-testid="stSidebar"] * {
-        color: #E2E8F0 !important;
+        color: #FAFAFA !important;
     }
 
-    /* Estilização dos botões da sidebar para combinar */
+    /* Estilização dos botões da sidebar para combinar com o tema azul */
     div.stButton > button {
-        background-color: #1E293B !important;
-        border: 1px solid #334155 !important;
-        color: white !important;
+        background-color: #262730 !important;
+        border: 1px solid #464e5f !important;
+        color: #FAFAFA !important;
+        transition: all 300ms ease;
     }
     div.stButton > button:hover {
-        background-color: #334155 !important;
-        border-color: #8B5CF6 !important;
+        background-color: #3e404f !important;
+        border-color: #575c70 !important;
     }
+
+    /* Estilização da área de entrada de texto (chat_input) */
+    .stChatInput {
+        background-color: #16171f !important; /* Fundo escuro */
+        border: 1px solid #2e303a !important;
+    }
+    .stChatInput > div > div > input {
+        color: white !important;
+    }
+
     </style>
 """, unsafe_allow_html=True)
-
 # --- SIDEBAR ---
 with st.sidebar:
     st.markdown("""
