@@ -8,24 +8,36 @@ import textwrap
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
 # --- CSS GLOBAL ---
-# --- CSS GLOBAL ---
 css = textwrap.dedent("""
 <style>
-/* Força o fundo roxo em todos os níveis da Sidebar */
-[data-testid="stSidebar"], 
-[data-testid="stSidebar"] section, 
-[data-testid="stSidebar"] div {
-    background-color: #4B0082 !important;
-    background: #4B0082 !important;
+/* 1. Define o fundo de toda a página */
+.stApp {
+    background-color: #05070a !important;
 }
 
-/* Remove qualquer resquício de branco de botões e inputs */
+/* 2. Barra lateral - Força o roxo em todos os níveis */
+[data-testid="stSidebar"], 
+[data-testid="stSidebar"] section[data-testid="stSidebar"] {
+    background-color: #4B0082 !important;
+}
+
+/* 3. Remove fundos brancos de todos os containers internos da sidebar */
+[data-testid="stSidebar"] div[data-testid="stVerticalBlock"],
+[data-testid="stSidebar"] div[data-testid="stSidebarContent"],
+[data-testid="stSidebar"] div[data-testid="stElementContainer"] {
+    background-color: #4B0082 !important;
+}
+
+/* 4. Força cor de texto branca em todos os elementos */
+[data-testid="stSidebar"] * {
+    color: #FAFAFA !important;
+}
+
+/* 5. Remove bordas e fundos de botões e inputs */
 [data-testid="stSidebar"] button, 
-[data-testid="stSidebar"] div[role="radiogroup"],
-[data-testid="stSidebar"] input {
+[data-testid="stSidebar"] div[data-testid="stTextInput"] > div {
     background-color: #5D10A6 !important;
     border: none !important;
-    color: #FFFFFF !important;
 }
 </style>
 """)
