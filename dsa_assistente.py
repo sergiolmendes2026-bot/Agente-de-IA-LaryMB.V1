@@ -40,7 +40,7 @@ with st.sidebar:
   <div style="color: #00FF00 !important; font-weight: bold; display: flex; align-items: center;">
     <span style="color: #00FF00 !important; margin-right: 8px;">●</span>
     <span style="color: #00FF00 !important;">Status: Online</span>
-</div>
+  </div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
