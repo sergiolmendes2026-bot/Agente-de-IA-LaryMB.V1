@@ -49,12 +49,10 @@ with st.sidebar:
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3>Agente de IA Larymb.v1</h3>
-            
             <div style="font-weight: bold; font-size: 0.8em;">
                 <span style="color: white;">●</span> 
                 <span style="color: #00FF00;">Status: Online</span>
             </div>
-            
         </div>
     """, unsafe_allow_html=True)
     
