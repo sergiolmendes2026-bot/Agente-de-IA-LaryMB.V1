@@ -45,15 +45,15 @@ st.markdown("""
 
 # --- SIDEBAR ---
 with st.sidebar:
-    st.markdown("""
-      <div style="text-align: center; padding-bottom: 20px;">
-    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
-    <h3>Agente de IA Larymb.v1</h3>
-    <!-- A linha abaixo deixa a bolinha branca e o texto verde -->
-    <div style="font-weight: bold; font-size: 0.8em; color: white;">
-        ● <span style="color: #00FF00;">Status: Online</span>
-    </div>
-</div>
+  st.markdown("""
+        <div style="text-align: center; padding-bottom: 20px;">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
+            <h3>Agente de IA Larymb.v1</h3>
+            <div style="font-weight: bold; font-size: 0.8em; color: white;">
+                ● <span style="color: #00FF00;">Status: Online</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("---")
     if st.button("🏠 Início", use_container_width=True, key="btn_i"): st.session_state.page = "Início"
