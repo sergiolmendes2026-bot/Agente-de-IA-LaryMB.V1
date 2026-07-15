@@ -54,10 +54,19 @@ with st.sidebar:
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
     
-  # --- Aviso de IA com design específico ---
- # --- Aviso de IA com design específico ---
+ # --- Aviso de IA (Design Exato) ---
     st.markdown("""
-        <div style="background-color: #263238; padding: 15px; border-radius: 10px; color: #4A90E2; font-family: sans-serif;">
+        <div style="
+            background-color: #263238; 
+            padding: 15px; 
+            border-radius: 10px; 
+            color: #4A90E2; 
+            font-family: sans-serif; 
+            font-size: 14px;
+            line-height: 1.4;
+            border: 1px solid #37474F;
+            margin-bottom: 20px;
+        ">
             <strong>Aviso:</strong> a IA pode cometer erros. <br>
             Verifique fatos críticos.
         </div>
