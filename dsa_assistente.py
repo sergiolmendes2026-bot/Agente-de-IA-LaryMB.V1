@@ -61,6 +61,7 @@ with st.sidebar:
     NUMERO_TELEFONE = "5511994376755"
     MENSAGEM_PADRAO = "Olá, preciso de ajuda com o Agente de IA."
     URL_WHATSAPP = f"https://wa.me/{NUMERO_TELEFONE}?text={MENSAGEM_PADRAO.replace(' ', '%20')}"
+    st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
 
     st.markdown(
         f"""
