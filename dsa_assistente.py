@@ -65,7 +65,7 @@ with st.sidebar:
             margin-bottom: 20px;
         ">
             <strong>Aviso:</strong> a IA pode gerar respostas imprecisas, incompletas ou erradas. Sempre verifique informações críticas antes de confirmar totalmente. <br>
-            Verifique fatos críticos.
+            
         </div>
     """, unsafe_allow_html=True)
     
