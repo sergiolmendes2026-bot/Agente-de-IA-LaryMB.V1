@@ -57,7 +57,7 @@ with st.sidebar:
     if st.button("🏠 Início", use_container_width=True, key="btn_i"): st.session_state.page = "Início"
     if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
     if st.button("⚙️ Configurações", use_container_width=True, key="btn_co"): st.session_state.page = "Configurações"
-    st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)   
+   
     
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
@@ -65,7 +65,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("---")
     st.info("Aviso: IA pode gerar respostas imprecisas. incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente.", icon="ℹ️")
-
+    st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)  
 
      
 # --- Configuração do Link e Número ---
