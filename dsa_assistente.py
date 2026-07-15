@@ -37,10 +37,10 @@ st.markdown("""
 # --- SIDEBAR ---
 with st.sidebar:
     st.markdown("""
-  <div style="color: #00FF00 !important; font-weight: bold; display: flex; align-items: center;">
-    <span style="color: #00FF00 !important; margin-right: 8px;">●</span>
-    <span style="color: #00FF00 !important;">Status: Online</span>
-  </div>
+<span style="color: #00FF00 !important; display: inline-flex; align-items: center; gap: 8px;">
+  <span>●</span>
+  <span>Status: Online</span>
+</span>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
