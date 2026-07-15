@@ -10,23 +10,41 @@ st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon
 # --- CSS GLOBAL ---
 css = textwrap.dedent("""
 <style>
+/* 1. Define o fundo principal da página */
 .stApp {
     background-color: #05070a;
-    background-image: radial-gradient(circle at center bottom, #0d2149 0%, #05070a 70%), radial-gradient(white, rgba(255, 255, 255, 0.15) 2px, transparent 3px), linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    color: #ffffff;
 }
+
+/* 2. Barra lateral completa e seu fundo */
 [data-testid="stSidebar"] {
     background-color: #4B0082 !important;
-    border-right: 1px solid #2e303a;
-    padding-top: 2rem;
 }
-/* Regra específica para forçar o verde no status */
-[data-testid="stSidebar"] div.status-verde {
-    color: #22c55e !important;
+
+/* 3. Forçar fundo roxo em TODOS os sub-containers dentro da sidebar */
+[data-testid="stSidebar"] div[data-testid="stVerticalBlock"],
+[data-testid="stSidebar"] div[data-testid="stSidebarContent"],
+[data-testid="stSidebar"] section[data-testid="stSidebar"] {
+    background-color: #4B0082 !important;
 }
-/* Mantém o restante branco */
-[data-testid="stSidebar"] *:not(.status-verde) { 
-    color: #FAFAFA !important; 
+
+/* 4. Remover fundos brancos de inputs e botões */
+[data-testid="stSidebar"] div[role="button"], 
+[data-testid="stSidebar"] input,
+[data-testid="stSidebar"] div[data-testid="stTextInput"],
+[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"] {
+    background-color: #4B0082 !important;
+}
+
+/* 5. Garantir que todo o texto seja branco e sem bordas extras */
+[data-testid="stSidebar"] * {
+    color: #FAFAFA !important;
+    border-color: #4B0082 !important;
+}
+
+/* 6. Ajuste fino do aviso (st.info) para combinar */
+[data-testid="stSidebar"] .stInfo {
+    background-color: #5D10A6 !important;
+    border: none !important;
 }
 </style>
 """)
