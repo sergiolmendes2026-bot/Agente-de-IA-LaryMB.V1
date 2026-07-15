@@ -54,8 +54,12 @@ with st.sidebar:
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
     
-    st.markdown("---")
-    st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
+   # --- Aviso de IA ---
+    st.markdown("""
+        <div style="background-color: #1e2126; padding: 10px; border-radius: 5px; font-size: 0.8em; color: #888; border-left: 3px solid #8B5CF6;">
+            <strong>Aviso:</strong> IA pode gerar respostas imprecisas, incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente no roteiro gerado.
+        </div>
+    """, unsafe_allow_html=True)
     
     # --- Configuração Link WhatsApp ---
     NUMERO_TELEFONE = "5511994376755"
