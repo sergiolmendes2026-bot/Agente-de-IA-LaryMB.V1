@@ -54,17 +54,14 @@ with st.sidebar:
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
     
- # Certifique-se de que o st.markdown abaixo esteja alinhado com os comandos anteriores da sidebar
+ # --- Aviso de IA com design azul ---
     st.markdown("""
         <div style="
-            background-color: #263238; 
+            background-color: #2C3E50; 
             padding: 15px; 
             border-radius: 10px; 
-            color: #4A90E2; 
+            color: #5DADE2; 
             font-family: sans-serif; 
-            font-size: 14px;
-            line-height: 1.4;
-            border: 1px solid #37474F;
             margin-bottom: 20px;
         ">
             <strong>Aviso:</strong> a IA pode cometer erros. <br>
