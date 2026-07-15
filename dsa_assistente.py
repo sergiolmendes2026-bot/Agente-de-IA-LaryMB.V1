@@ -62,9 +62,12 @@ with st.sidebar:
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
     
     st.markdown("---")
-    st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
+    st.markdown("---")
+    st.info("Aviso: IA pode gerar respostas imprecisas. incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente.", icon="ℹ️")
+
     st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)
-    # --- Configuração do Link e Número ---
+  
+# --- Configuração do Link e Número ---
 NUMERO_TELEFONE = "5511994376755"
 MENSAGEM_PADRAO = "Olá, preciso de ajuda com o Agente de IA."
 # A correção abaixo garante que o link seja formado corretamente
