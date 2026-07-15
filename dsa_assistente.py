@@ -57,7 +57,7 @@ with st.sidebar:
     if st.button("🏠 Início", use_container_width=True, key="btn_i"): st.session_state.page = "Início"
     if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
     if st.button("⚙️ Configurações", use_container_width=True, key="btn_co"): st.session_state.page = "Configurações"
-       st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)   
+    st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)   
     
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password", key="api_key_input")
