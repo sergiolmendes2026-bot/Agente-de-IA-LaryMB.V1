@@ -37,14 +37,10 @@ st.markdown("""
 # --- SIDEBAR ---
 with st.sidebar:
     st.markdown("""
-        <div style="text-align: center; padding-bottom: 20px;">
-            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
-            <h3>Agente de IA Larymb.v1</h3>
-            <div style="font-weight: bold; font-size: 0.8em; color: white;">
-                <span style="color: #00FF00; margin-right: 5px;">●</span>
-<span>Status: Online</span>
-            </div>
-        </div>
+  <div style="color: #00FF00 !important; font-weight: bold; display: flex; align-items: center;">
+    <span style="color: #00FF00 !important; margin-right: 8px;">●</span>
+    <span style="color: #00FF00 !important;">Status: Online</span>
+</div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
