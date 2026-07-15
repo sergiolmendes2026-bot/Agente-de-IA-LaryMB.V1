@@ -12,4 +12,4 @@ COPY . /app
 
 # FORÇA o Streamlit a procurar na pasta /app
 EXPOSE 8501
-CMD ["streamlit", "run", "/app/dsa_assitente.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "dsa_assitente.py", "--server.port=8501", "--server.address=0.0.0.0"]
