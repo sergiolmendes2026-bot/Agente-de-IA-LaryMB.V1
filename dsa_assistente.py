@@ -28,24 +28,15 @@ init_db()
 # --- CSS GLOBAL E SIDEBAR ---
 st.markdown("""
     <style>
-    /* Fundo da aplicação */
     .stApp { background-color: #050505; color: #ffffff; }
-    
-    /* Estilização da Sidebar (A parte roxa que você pediu) */
-    [data-testid="stSidebar"] {
-        background-color: #4B0082; 
-    }
-    
-    /* Ajuste para o texto dentro da sidebar ficar branco */
-    [data-testid="stSidebar"] * {
-        color: white !important;
-    }
+    [data-testid="stSidebar"] { background-color: #4B0082; }
+    [data-testid="stSidebar"] * { color: white !important; }
     </style>
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR ---
 with st.sidebar:
-  st.markdown("""
+    st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3>Agente de IA Larymb.v1</h3>
@@ -65,39 +56,25 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("IA pode cometer erros. Sempre verifique as respostas.")
-    st.link_button("✉️ Email para Suporte", "sergiolmendes2026@gmail.com", use_container_width=True)
-    # --- Configuração do Link e Número ---
-NUMERO_TELEFONE = "5511994376755"
-MENSAGEM_PADRAO = "Olá, preciso de ajuda com o Agente de IA."
-# A correção abaixo garante que o link seja formado corretamente
-URL_WHATSAPP = f"https://wa.me/{NUMERO_TELEFONE}?text={MENSAGEM_PADRAO.replace(' ', '%20')}"
+    
+    # --- Configuração Link WhatsApp ---
+    NUMERO_TELEFONE = "5511994376755"
+    MENSAGEM_PADRAO = "Olá, preciso de ajuda com o Agente de IA."
+    URL_WHATSAPP = f"https://wa.me/{NUMERO_TELEFONE}?text={MENSAGEM_PADRAO.replace(' ', '%20')}"
 
-# --- Inserção do Ícone Customizado via HTML ---
-st.sidebar.markdown(
-    f"""
-    <a href="{URL_WHATSAPP}" target="_blank" style="
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        background-color: #262730;
-        color: #FAFAFA;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        font-family: 'Source Sans Pro', sans-serif;
-        font-weight: 400;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid #464e5f;
-        transition: border-color 300ms, background-color 300ms;
-        width: 100%;
-        box-sizing: border-box;
-    " onmouseover="this.style.borderColor='#FF4B4B'; this.style.backgroundColor='#2e303a'" onmouseout="this.style.borderColor='#464e5f'; this.style.backgroundColor='#262730'">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 10px;">
-        WhatsApp de Suporte
-    </a>
-    """, unsafe_allow_html=True
-)
+    st.markdown(
+        f"""
+        <a href="{URL_WHATSAPP}" target="_blank" style="
+            display: flex; align-items: center; justify-content: center;
+            background-color: #262730; color: #FAFAFA; padding: 0.5rem 1rem;
+            border-radius: 0.5rem; text-decoration: none; font-weight: 400;
+            border: 1px solid #464e5f; width: 100%; box-sizing: border-box;
+        ">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 10px;">
+            WhatsApp de Suporte
+        </a>
+        """, unsafe_allow_html=True
+    )
 
 # --- LÓGICA DE NAVEGAÇÃO ---
 if "page" not in st.session_state: st.session_state.page = "Início"
@@ -113,7 +90,6 @@ if st.session_state.page == "Início":
         </p>
     """, unsafe_allow_html=True)
     
-    # Exibir histórico
     conn = sqlite3.connect('historico_chat.db')
     c = conn.cursor()
     c.execute("SELECT role, content FROM chats ORDER BY id ASC")
@@ -124,7 +100,6 @@ if st.session_state.page == "Início":
         with st.chat_message(role):
             st.markdown(content)
             
-    # Entrada do Usuário
     if prompt := st.chat_input("Qual sua dúvida?"):
         if not api_key:
             st.error("Insira sua API Key na lateral.")
@@ -156,7 +131,6 @@ elif st.session_state.page == "Conversas":
 
 elif st.session_state.page == "Configurações":
     st.header("⚙️ Configurações")
-    modo_tradutor = st.checkbox("Ativar Modo Tradutor")
     if st.button("Limpar Histórico de Chat"):
         conn = sqlite3.connect('historico_chat.db')
         c = conn.cursor()
