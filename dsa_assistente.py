@@ -41,7 +41,7 @@ with st.sidebar:
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3>Agente de IA Larymb.v1</h3>
             <div style="font-weight: bold; font-size: 0.8em; color: white;">
-                ● <span style="color: #00FF00;">Status: Online</span>
+                <span style="color: #00FF00;">● Status: Online</span>
             </div>
         </div>
     """, unsafe_allow_html=True)
