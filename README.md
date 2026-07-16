@@ -8,12 +8,12 @@
 
 
 
-Confira meu projeto publicado com **Streamlit Community Cloud**:
+Confira meu projeto publicado na minha instacia**:
 
 
 
 
- 🤖  https://agente-de-ia-larymbv1.streamlit.app/
+ 🤖  https://agenteialarymbv1.duckdns.org/
 
 
 
