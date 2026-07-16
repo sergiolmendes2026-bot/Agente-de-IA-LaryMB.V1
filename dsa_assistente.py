@@ -96,7 +96,7 @@ st.sidebar.markdown(
         box-sizing: border-box;
     " onmouseover="this.style.borderColor='#FF4B4B'; this.style.backgroundColor='#2e303a'" onmouseout="this.style.borderColor='#464e5f'; this.style.backgroundColor='#262730'">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 10px;">
-        WhatsApp de Suporte
+        WhatsApp Falar com Suporte
     </a>
     """, unsafe_allow_html=True
 )
