@@ -65,7 +65,31 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("---")
     st.info("Aviso: IA pode gerar respostas imprecisas. incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente.", icon="ℹ️")
-    st.link_button("✉️ Enviar e-mail para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
+    st.sidebar.markdown(
+    f"""
+    <a href="mailto:sergiolmendes2026@gmail.com" style="
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        background-color: #262730;
+        color: #FAFAFA;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #464e5f;
+        transition: border-color 300ms, background-color 300ms;
+        width: 100%;
+        box-sizing: border-box;
+    " onmouseover="this.style.borderColor='#FF4B4B'; this.style.backgroundColor='#2e303a'" onmouseout="this.style.borderColor='#464e5f'; this.style.backgroundColor='#262730'">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" width="20" style="margin-right: 10px;">
+        Enviar e-mail para Suporte
+    </a>
+    """, unsafe_allow_html=True
+)
 
      
 # --- Configuração do Link e Número ---
