@@ -60,6 +60,8 @@ with st.sidebar:
     
     st.markdown("---")
     api_key = st.text_input("Insira sua API Key Groq", type="password")
+
+    st.info("Aviso: IA pode gerar respostas imprecisas. incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente.", icon="ℹ️")
     
     st.markdown("---")
     # Botão Email
