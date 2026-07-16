@@ -129,8 +129,17 @@ st.sidebar.markdown(
 if "page" not in st.session_state: st.session_state.page = "Início"
 
 if st.session_state.page == "Início":
-    st.markdown('<h1 style="text-align: center; color: white;">Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?</h1>', unsafe_allow_html=True)
-        
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: white; margin-bottom: 5px;">
+            Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?
+        </h1>
+        <p style="color: #A0A0A0; font-size: 1.1em; font-weight: 300;">
+            Seu guia inteligente para respostas, explicações e referências.
+        </p>
+    </div>
+""", unsafe_allow_html=True)        
+    
     # Carregar histórico do banco
     conn = sqlite3.connect('historico_chat.db')
     mensagens_db = conn.cursor().execute("SELECT role, content FROM chats ORDER BY id ASC").fetchall()
