@@ -130,10 +130,7 @@ if "page" not in st.session_state: st.session_state.page = "Início"
 
 if st.session_state.page == "Início":
     st.markdown('<h1 style="text-align: center; color: white;">Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?</h1>', unsafe_allow_html=True)
-    </h1>
-        <p style="text-align: center; color: #888; margin-bottom: 30px;">
-            Seu guia inteligente para respostas, explicações e referências.
-    
+        
     # Carregar histórico do banco
     conn = sqlite3.connect('historico_chat.db')
     mensagens_db = conn.cursor().execute("SELECT role, content FROM chats ORDER BY id ASC").fetchall()
