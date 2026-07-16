@@ -65,7 +65,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("---")
     st.info("Aviso: IA pode gerar respostas imprecisas. incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente.", icon="ℹ️")
-    st.link_button("✉️ Email para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
+    st.link_button("✉️ Enviar E-mail para Suporte", "mailto:sergiolmendes2026@gmail.com", use_container_width=True)
 
      
 # --- Configuração do Link e Número ---
