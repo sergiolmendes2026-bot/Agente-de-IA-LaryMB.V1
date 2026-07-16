@@ -6,12 +6,30 @@ import datetime
 # --- CONFIGURAÇÃO ---
 st.set_page_config(page_title="Agente de IA Larymb.v1", layout="wide", page_icon="🤖")
 
+# --- CSS GLOBAL ---
+st.markdown("""
+    <style>
+    .stApp { 
+        background: radial-gradient(circle at center, #001f3f 0%, #050505 100%) !important;
+        font-family: 'Sans Serif', Arial, sans-serif !important;
+        box-shadow: inset 0px 0px 150px 30px rgba(75, 0, 130, 0.15) !important; 
+    }
+    [data-testid="stSidebar"] { background-color: #4B0082 !important; }
+    [data-testid="stSidebar"] * { color: white !important; }
+    [data-testid="stChatInput"] {
+        box-shadow: 0px 0px 15px 5px rgba(0, 191, 255, 0.4) !important;
+        border-radius: 15px !important;
+        background-color: #1a1a1a !important;
+    }
+    .status-verde { color: #00FF00 !important; font-weight: bold; }
+    </style>
+""", unsafe_allow_html=True)
+
 # --- BANCO DE DADOS ---
 def init_db():
     conn = sqlite3.connect('historico_chat.db')
     c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS chats 
-                  (id INTEGER PRIMARY KEY, role TEXT, content TEXT, timestamp TEXT)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS chats (id INTEGER PRIMARY KEY, role TEXT, content TEXT, timestamp TEXT)''')
     conn.commit()
     conn.close()
 
@@ -25,169 +43,68 @@ def salvar_mensagem(role, content):
 
 init_db()
 
-# --- CSS GLOBAL E SIDEBAR ---
-st.markdown("""
-    <style>
-    /* Fundo da aplicação */
-    .stApp { background-color: #050505; color: #ffffff; }
-    
-    /* Estilização da Sidebar (A parte roxa que você pediu) */
-    [data-testid="stSidebar"] {
-        background-color: #4B0082; 
-    }
-    
-    /* Ajuste para o texto dentro da sidebar ficar branco */
-    [data-testid="stSidebar"] * {
-        color: white !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 # --- SIDEBAR ---
 with st.sidebar:
     st.markdown("""
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Larymb" width="100">
             <h3>Agente de IA Larymb.v1</h3>
-            <div style="color: #D8BFD8; font-size: 0.8em; font-weight: bold;">● Status: Online</div>
+            <div class="status-verde">● Status: Online</div>
         </div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    if st.button("🏠 Início", use_container_width=True, key="btn_i"): st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
-    if st.button("⚙️ Configurações", use_container_width=True, key="btn_co"): st.session_state.page = "Configurações"
-   
+    if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
+    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
+    if st.button("⚙️ Configurações", use_container_width=True): st.session_state.page = "Configurações"
     
     st.markdown("---")
-    api_key = st.text_input("Insira sua chave API Key Groq pressione enter", type="password", key="api_key_input")
+    api_key = st.text_input("Insira sua API Key Groq", type="password")
     
     st.markdown("---")
-    st.markdown("---")
-    st.info("Aviso: IA pode gerar respostas imprecisas. incompletas ou erradas. Sempre verifique informações críticas antes de confiar totalmente.", icon="ℹ️")
-    st.sidebar.markdown(
-    f"""
-    <a href="mailto:sergiolmendes2026@gmail.com" style="
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        background-color: #262730;
-        color: #FAFAFA;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        font-family: 'Source Sans Pro', sans-serif;
-        font-weight: 400;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid #464e5f;
-        transition: border-color 300ms, background-color 300ms;
-        width: 100%;
-        box-sizing: border-box;
-    " onmouseover="this.style.borderColor='#FF4B4B'; this.style.backgroundColor='#2e303a'" onmouseout="this.style.borderColor='#464e5f'; this.style.backgroundColor='#262730'">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" width="20" style="margin-right: 10px;">
-        Enviar e-mail para Suporte
-    </a>
-    """, unsafe_allow_html=True
-)
+    # Botão Email
+    st.markdown('<a href="mailto:sergiolmendes2026@gmail.com" style="display: flex; align-items: center; justify-content: left; background-color: #262730; color: #FAFAFA; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; border: 1px solid #464e5f; width: 100%; box-sizing: border-box;">✉️ Enviar e-mail para Suporte</a>', unsafe_allow_html=True)
+    # Botão WhatsApp
+    st.markdown('<a href="https://wa.me/5511994376755" target="_blank" style="display: flex; align-items: center; justify-content: left; background-color: #262730; color: #FAFAFA; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; border: 1px solid #464e5f; width: 100%; box-sizing: border-box; margin-top: 10px;">💬 WhatsApp Falar com Suporte</a>', unsafe_allow_html=True)
 
-     
-# --- Configuração do Link e Número ---
-NUMERO_TELEFONE = "5511994376755"
-MENSAGEM_PADRAO = "Olá, preciso de ajuda com o Agente de IA."
-# A correção abaixo garante que o link seja formado corretamente
-URL_WHATSAPP = f"https://wa.me/{NUMERO_TELEFONE}?text={MENSAGEM_PADRAO.replace(' ', '%20')}"
-
-# --- Inserção do Ícone Customizado via HTML ---
-st.sidebar.markdown(
-    f"""
-    <a href="{URL_WHATSAPP}" target="_blank" style="
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        background-color: #262730;
-        color: #FAFAFA;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        font-family: 'Source Sans Pro', sans-serif;
-        font-weight: 400;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid #464e5f;
-        transition: border-color 300ms, background-color 300ms;
-        width: 100%;
-        box-sizing: border-box;
-    " onmouseover="this.style.borderColor='#FF4B4B'; this.style.backgroundColor='#2e303a'" onmouseout="this.style.borderColor='#464e5f'; this.style.backgroundColor='#262730'">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 10px;">
-        WhatsApp Falar com Suporte
-    </a>
-    """, unsafe_allow_html=True
-)
-
-# --- LÓGICA DE NAVEGAÇÃO ---
+# --- LÓGICA DO CHATBOT ---
 if "page" not in st.session_state: st.session_state.page = "Início"
 
-# --- PÁGINA INÍCIO ---
 if st.session_state.page == "Início":
-    st.markdown("""
-        <h1 style="text-align: center; color: white;">
-            Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?
-        </h1>
-        <p style="text-align: center; color: #888; margin-bottom: 30px;">
-            Seu guia inteligente para respostas, explicações e referências.
-        </p>
-    """, unsafe_allow_html=True)
+    st.markdown('<h1 style="text-align: center; color: white;">Como posso <span style="color: #8B5CF6;">te ajudar</span> hoje?</h1>', unsafe_allow_html=True)
     
-    # Exibir histórico
+    # Carregar histórico do banco
     conn = sqlite3.connect('historico_chat.db')
-    c = conn.cursor()
-    c.execute("SELECT role, content FROM chats ORDER BY id ASC")
-    mensagens = c.fetchall()
+    mensagens_db = conn.cursor().execute("SELECT role, content FROM chats ORDER BY id ASC").fetchall()
     conn.close()
 
-    for role, content in mensagens:
-        with st.chat_message(role):
-            st.markdown(content)
-            
-    # Entrada do Usuário
+    # Exibir histórico na tela
+    for role, content in mensagens_db:
+        avatar = "🤖" if role == "assistant" else "👤"
+        with st.chat_message(role, avatar=avatar): st.markdown(content)
+
     if prompt := st.chat_input("Qual sua dúvida?"):
         if not api_key:
             st.error("Insira sua API Key na lateral.")
         else:
             salvar_mensagem("user", prompt)
+            with st.chat_message("user", avatar="👤"): st.markdown(prompt)
+            
+            # Preparar histórico para a API (Memória)
+            historico_api = [{"role": "system", "content": "Você é o Larymb.v1, um assistente inteligente e prestativo."}]
+            for r, c in mensagens_db: historico_api.append({"role": r, "content": c})
+            historico_api.append({"role": "user", "content": prompt})
+
             client = Groq(api_key=api_key)
-            response = client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model="llama-3.3-70b-versatile"
-            )
-            resposta = response.choices[0].message.content
+            resposta = client.chat.completions.create(messages=historico_api, model="llama-3.3-70b-versatile").choices[0].message.content
+            
             salvar_mensagem("assistant", resposta)
             st.rerun()
 
-elif st.session_state.page == "Conversas":
-    st.header("💬 Conversas")
-    conn = sqlite3.connect('historico_chat.db')
-    c = conn.cursor()
-    c.execute("SELECT role, content FROM chats ORDER BY id ASC")
-    mensagens = c.fetchall()
-    conn.close()
-
-    if not mensagens:
-        st.info("Nenhuma conversa salva ainda.")
-    else:
-        for role, content in mensagens:
-            with st.chat_message(role):
-                st.markdown(content)
-
 elif st.session_state.page == "Configurações":
-    st.header("⚙️ Configurações")
-    modo_tradutor = st.checkbox("Ativar Modo Tradutor")
-    if st.button("Limpar Histórico de Chat"):
+    if st.button("Limpar Histórico"):
         conn = sqlite3.connect('historico_chat.db')
-        c = conn.cursor()
-        c.execute("DELETE FROM chats")
+        conn.cursor().execute("DELETE FROM chats")
         conn.commit()
         conn.close()
-        st.warning("Histórico apagado!")
         st.rerun()
