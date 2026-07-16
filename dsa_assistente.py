@@ -55,7 +55,7 @@ with st.sidebar:
     
     st.markdown("---")
     if st.button("🏠 Início", use_container_width=True): st.session_state.page = "Início"
-    if st.button("💬 Conversas", use_container_width=True): st.session_state.page = "Conversas"
+    if st.button("💬 Conversas", use_container_width=True, key="btn_c"): st.session_state.page = "Conversas"
     if st.button("⚙️ Configurações", use_container_width=True): st.session_state.page = "Configurações"
     
     st.markdown("---")
