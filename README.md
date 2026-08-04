@@ -13,7 +13,7 @@ Confira meu projeto publicado na minha instacia**:
 
 
 
- 🤖  https://agenteialarymbv1.duckdns.org/
+ 🤖  https://agente-de-ia-larymbv1.streamlit.app/
 
 
 
