@@ -8,7 +8,7 @@
 
 
 
-Confira meu projeto publicado na minha instacia**:
+Realizado o deploy no Streamlit Community Cloud.
 
 
 
